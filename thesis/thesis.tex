@@ -1,0 +1,60 @@
+\documentclass[]{upb_cs_thesis} % include german inside brackets for a German thesis
+
+% load your own packages and user-defined commands
+\input{packages}
+\input{commands}
+
+% set up some resources (graphics and bibliography)
+\graphicspath{{figures/}}
+
+
+%%%%%%%%%
+% your thesis title, name, advisor, etc. go here;
+%%%%%%%%%
+\title{Assessing Stereotypical Social Biases in Text Sequences using Language Models}
+\author{Meher Vivek Dheram}
+\thesistype{Master's Thesis Proposal}
+%\thesistype{Bachelor's Thesis}
+% \thesistype{Masterarbeit}
+%\thesistype{Bachelorarbeit}
+\degree{Master of Science}
+%\degree{Bachelor of Science}
+\researchgroup{Computational Social Science}
+\supervisor{Jun.-Prof. Dr. Henning Wachsmuth, 
+
+Maximilian Spliethöver}
+\submissiondate{\today{}}
+
+
+% here your thesis really starts
+\begin{document}
+
+% start with the titlepage, the formalities, and then the abstract
+\input{pretext/titlepage} % prints the title page
+% \cleardoublepage
+\vspace*{\fill}
+\acresetall
+\vspace*{\fill}
+
+\tableofcontents % prints the table of contents
+
+
+%%%%%%%%%
+% the contents of your thesis go into file body.tex
+%%%%%%%%%
+\input{body}
+
+% include the bibliography, and add it as a chapter the table of contents
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{apalike}
+\bibliography{literature.bib}
+
+%%%%%%%%%
+% the appendices of your thesis go into file appendix.tex
+%%%%%%%%%
+\appendix
+\input{appendix}
+
+\end{document}
