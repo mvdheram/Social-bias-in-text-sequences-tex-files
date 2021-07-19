@@ -1,0 +1,53 @@
+\chapter{Experiments}
+
+\section{Overview}
+\begin{itemize}
+    \item Why transfer learning based approach ?
+    \item Why classification ?
+    \item Final goal of assessing stereotypical social bias in arguments produced by args.me search engine
+\end{itemize}
+
+Steps: 
+\begin{enumerate}
+    \item Collecting stereotypical samples with respect to different domains such as race, gender, profession etc. are gathered from the available sources (CrowS-Pairs \cite{nangia2020crows}, Social bias frames \cite{sap2019social}, StereoSet \cite{nadeem2020stereoset} as seen so far).
+    \item Exploratory data analysis for some insights into the different types of biases (gender, race, profession, religion).
+    \item Stereotypical dataset target labels interpretation
+        \begin{itemize}
+            \item Different perspectives of classification labels used 
+            \item Anti-stereotypical samples introduced to get the perspective whether a text sequence is socially shared or not socially shared, as stereotypes can be interpreted as pictures in head.
+            \item  Including unrelated as a category in classification, why?
+        \end{itemize}
+    \item Categorization experiments
+    \begin{itemize}
+        \item Binary classification 
+        \item Multi-class classification 
+        \item Multi-label classification 
+        \item Why going with multi-label ?? When considering anti-stereotypical 
+    \end{itemize}
+\end{enumerate}
+\section{Experimental setup}
+\begin{itemize}
+    \item Libraries used {Ktrain, huggingface, pytorch lightening}
+    \item Classification head and the underlying methodology 
+    \item Hyper-parameter search {RayTune}, search space
+\end{itemize}
+\section{Assessing stereotypical social bias}
+\subsection{Deep learning approach}
+\begin{itemize}
+    \item Brief description of language models
+    \item Main features of language models which have impact like underlying training data, architecture and training size as table ??
+    \item Why these language model?
+\end{itemize}
+\subsection{Machine learning approach}
+    \begin{itemize}
+        \item Brief description of  models
+        \item Why these model?
+    \end{itemize}
+\section{Evaluation metrics \cite{tsoumakas2007multi}}
+    \begin{itemize}
+        \item Evaluation metrics selected for multi-label classification 
+        \item Hamming loss 
+        \item AUC-ROC score 
+        \item Precision, recall, f-measure with respect to different categories
+    \end{itemize}
+    
