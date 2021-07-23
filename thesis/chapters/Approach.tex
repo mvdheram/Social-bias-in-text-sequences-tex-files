@@ -32,15 +32,72 @@ Steps:
     \item Hyper-parameter search {RayTune}, search space
 \end{itemize}
 \section{Assessing stereotypical social bias}
-\subsection{Deep learning approach}
+\subsection{End-to-end Deep learning approach}
 \begin{itemize}
-    \item Brief description of language models
+    \item Brief description of language models with main underlying features
+    
+    Language models :
+    \begin{itemize}
+        \item GPT-2 \cite{radford2019language}
+        
+            Features :
+    \begin{itemize}
+        \item Training data 
+        \item Training procedure
+        \begin{itemize}
+            \item Pre-processing
+            \item pre-training
+        \end{itemize}
+        \item encoded stereotypes (research from stereoset and crows pair)
+    \end{itemize}
+        \item BERT-base-uncased
+        
+            Features \cite{devlin2018bert}:
+            \begin{itemize}
+                \item Training data : BookCorpus (11,038 unpublished books) and English Wikipedia text articles  
+                \item Training procedure
+                \begin{itemize}
+                    \item Pre-processing : Lowercased, tokenized using wordpiece and vocab of size 30,000
+                    \item pre-training
+                \end{itemize}
+                \item encoded stereotypes (research from stereoset and crows pair)
+    \end{itemize}
+        \item RoBERTa \cite{liu2019roberta}
+        
+            Features :
+            \begin{itemize}
+                \item Training data 
+                \item Training procedure
+                \begin{itemize}
+                    \item Pre-processing
+                    \item pre-training
+                \end{itemize}
+                \item encoded stereotypes (research from stereoset and crows pair)
+            \end{itemize}
+        \item XLnet \cite{yang2019xlnet}
+        
+            Features :
+            \begin{itemize}
+                \item Training data 
+                \item Training procedure
+                \begin{itemize}
+                    \item Pre-processing
+                    \item pre-training
+                \end{itemize}
+                \item encoded stereotypes (research from stereo-set and crows pair)
+            \end{itemize}
+    \end{itemize}
     \item Main features of language models which have impact like underlying training data, architecture and training size as table ??
     \item Why these language model?
 \end{itemize}
 \subsection{Machine learning approach}
     \begin{itemize}
-        \item Brief description of  models
+        \item Lexicon - based approach : 
+        \begin{itemize}
+            \item Project into word embedding space and score each word based on its distance from woman, men ??
+            \textbf{Refer }\cite{cryan2020detecting}
+        \end{itemize}
+        \item Brief description of  models,
         \item Why these model?
     \end{itemize}
 \section{Evaluation metrics} \cite{tsoumakas2007multi}
@@ -49,6 +106,5 @@ Steps:
         \item Hamming loss 
         \item AUC-ROC score 
         \item Precision, recall, f-measure with respect to different categories
-        \item 
     \end{itemize}
     
