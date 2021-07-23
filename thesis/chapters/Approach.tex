@@ -58,7 +58,7 @@ Steps:
                 \item Training procedure
                 \begin{itemize}
                     \item Pre-processing : Lowercased, tokenized using wordpiece and vocab of size 30,000
-                    \item pre-training
+                \item pre-training 
                 \end{itemize}
                 \item encoded stereotypes (research from stereoset and crows pair)
     \end{itemize}
@@ -90,7 +90,16 @@ Steps:
     \item Main features of language models which have impact like underlying training data, architecture and training size as table ??
     \item Why these language model?
 \end{itemize}
-\subsection{Machine learning approach}
+\subsection{Machine learning approach as baselines}
+
+Questions:
+
+\begin{enumerate}
+    \item How does accuracy vary with non-contextual word embeddings (e.g. Glove, flair) to BERT word embedding?
+    \item How does accuracy vary with baseline architecture ( applying word embeddings to sentence and taking arithmetic average) to a fine-tuned BERT model ?
+\end{enumerate}
+
+
     \begin{itemize}
         \item Lexicon - based approach : 
         \begin{itemize}
@@ -98,6 +107,11 @@ Steps:
             \textbf{Refer }\cite{cryan2020detecting}
         \end{itemize}
         \item Brief description of  models,
+        \begin{itemize}
+            \item SVM with selected features
+            \item Text-CNN with GLove,flair embedding
+            \item Random embedding with GRU and LSTM 
+        \end{itemize}
         \item Why these model?
     \end{itemize}
 \section{Evaluation metrics} \cite{tsoumakas2007multi}
