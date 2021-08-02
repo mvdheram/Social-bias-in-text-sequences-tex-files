@@ -28,7 +28,7 @@ Steps:
 \section{Experimental setup}
 \begin{itemize}
     \item Libraries used {Ktrain, huggingface, pytorch lightening}
-    \item Classification head and the underlying methodology 
+    \item Classification head and the underlying methodology of transfer learning 
     \item Hyper-parameter search {RayTune}, search space
 \end{itemize}
 \section{Assessing stereotypical social bias}
@@ -87,18 +87,40 @@ Steps:
                 \item encoded stereotypes (research from stereo-set and crows pair)
             \end{itemize}
     \end{itemize}
-    \item Main features of language models which have impact like underlying training data, architecture and training size as table ??
     \item Why these language model?
+    \item Training process
+        \begin{itemize}
+            \item Basic architecture of huggingface transformer models for sequence classification consists of 3 modules, namely, transformer module (pre-trained language model with weights), dropout (layer normalization), classifier (target specific layer). 
+            \item  Doing hyper-parameter search using the RayTune \footnote{\url{https://docs.ray.io/en/master/tune/index.html}} a python library for experiment execution and hyper-parameter tuning with the described model with classification head attached. Model hyperparameters can be defined as the parameters used to control the learning process which is set before training a model. \cite{bergstra2012random}\textbf{add reference}.  The goal of hyper-parameter search/optimization is to find optimal parameters out of search space. The three important features of hyper-parameter search are defining search space, defining search algorithm which is used to select the hyper-parameters from the search space and finally a metric which is used to evaluate the model with the hyper-parameter. The search space used is defined below 
+            \begin{itemize}
+                \item Learning rate : tune.loguniform(1e-5, 5e-5)
+                \item "num\_train\_epochs": tune.choice([2,3,5])
+                \item "per\_device\_train\_batch\_size": tune.choice([8, 16, 32])
+            \end{itemize}
+            The search algorithm used is basicVarientGenerator of ray which uses random search and grid search as algorithms. The objective metric is to reduce the validation loss. The models are run for 5 trials which leads to following trials  
+        \begin{figure}[h]
+            \includegraphics[width=12cm]{thesis/figures/hparameter.PNG}
+            \centering
+            \caption{Hyper-parameter search trails}
+            \label{fig:The learning problem setup}
+        \end{figure}
+        
+            \item Fine-tuning to target specific task (classification in our case) with target specific data (Multi-label dataset) by removing the language model head which is 
+            \begin{itemize}
+                \item 
+            \end{itemize}
+            
+            
+        \end{itemize}
 \end{itemize}
-\subsection{Machine learning approach as baselines}
+\subsection{Baselines}
 
 Questions:
 
 \begin{enumerate}
-    \item How does accuracy vary with non-contextual word embeddings (e.g. Glove, flair) to BERT word embedding?
-    \item How does accuracy vary with baseline architecture ( applying word embeddings to sentence and taking arithmetic average) to a fine-tuned BERT model ?
+    \item How does accuracy vary with non-contextual word embeddings (e.g. Glove, Word2Vec) to BERT word embedding?
+    \item How does accuracy vary with baseline architecture (applying word embeddings to sentence and taking arithmetic average) to a fine-tuned BERT model ?
 \end{enumerate}
-
 
     \begin{itemize}
         \item Lexicon - based approach : 
@@ -106,9 +128,9 @@ Questions:
             \item Project into word embedding space and score each word based on its distance from woman, men ??
             \textbf{Refer }\cite{cryan2020detecting}
         \end{itemize}
-        \item Brief description of  models,
+        \item Brief description of  models and features
         \begin{itemize}
-            \item SVM with selected features
+            \item SVM with selected lexicons + different features (toxicity, sentiment)
             \item Text-CNN with GLove,flair embedding
             \item Random embedding with GRU and LSTM 
         \end{itemize}
