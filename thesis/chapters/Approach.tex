@@ -105,11 +105,17 @@ Steps:
             \label{fig:The learning problem setup}
         \end{figure}
         
-            \item Fine-tuning to target specific task (classification in our case) with target specific data (Multi-label dataset) by removing the language model head which is 
+            \item Fine-tuning to target specific task (classification in our case) with target specific data (Multi-label dataset) by removing the language model head and replacing with 
             \begin{itemize}
-                \item 
+                \item Linear layer with outputs corresponding to the number of labels 
+                \item Adding corresponding activation function and loss function. As we are doing a multi label classification, we need to add a sigmoid activation function and binary cross entropy loss.
             \end{itemize}
-            
+        \item Training the fin-tuned model can be done by
+        \begin{itemize}
+            \item Training end - to - end wherein the entire fine-tuned model is trained and the loss is back-propagated to the entire network.
+            \item Adaptive training where some layers of the initial layer of  pre-trained language model are freezed and the final layer of pre-trained model along with the attached classification head is trained. 
+            \item Freezing the entire pre-trained model and only training the classification head attached. In this case only the  weights of the classification head are updated. 
+        \end{itemize}
             
         \end{itemize}
 \end{itemize}
