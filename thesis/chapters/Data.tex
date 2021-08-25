@@ -25,19 +25,24 @@ E.g. :
 Due to the subjectivity involved in the stereotypes, the authors have further validated the dataset with 5 validators to classify each association of contexts into stereotype, anti-stereotype and unrelated. Only the contexts where at least three validators agree upon were retained. The authors have divided stereotset into development set (25 \% of target terms) and test-set (75 \% of target terms) out of which only development set was publicly available and thus used in this thesis. Further details can be found in the paper \cite{nadeem2020stereoset}.
 \\
 
-Coming to other two datasets namely CrowS-pairs \cite{nangia2020crows}, Social bias frames \cite{sap2019social}. CrowS-pairs focuses on explicit expression of stereotypes about historically disadvantaged groups in the United States. 9 types of biases are covered in the CrowSpair, namely race, gender/gender identity, sexual orientation, religion, age, nationality, disability, physical appearance, socioeconomic status or occupation. This list is narrowed version of US Equal Employment Opportunities Commission's list of protected categories\footnote{https://www.eeoc.gov/prohibited-employment-policiespractices} \cite{nangia2020crows}. Crow
+Coming to other two datasets namely CrowS-pairs \cite{nangia2020crows}, Social bias frames \cite{sap2019social}. CrowS-pairs focuses on explicit expression of stereotypes about historically disadvantaged groups in the United States. 9 types of biases are covered in the CrowSpair, namely race, gender/gender identity, sexual orientation, religion, age, nationality, disability, physical appearance, socioeconomic status or occupation. This list is narrowed version of US Equal Employment Opportunities Commission's list of protected categories\footnote{https://www.eeoc.gov/prohibited-employment-policiespractices} \cite{nangia2020crows}. CrowSpair follow the same style that of \cite{nadeem2020stereoset}, where two pairs of sentences, one of which demonstrate a stereotype and the second sentence can demonstrate a violation against a stereotype (anti-stereotype). Both the stereotype and anti-stereotype sentences focuses on demonstrating or violating disadvantaged group in United States. The two pairs of sentences (stereo and anti-stereo) differ by only the group word being spoken about. CrowSpair cover intrasentence samples.
+
+The difference between stereoset and crowspair anti-stereotype and stereotype is that stereoset anti-stereotypes are based on attribute term while the crowSpair anti-stereotype is based on opposing historical group. 
 
 \begin{itemize}
     \item Why three datasets?? CrowS-Pairs \cite{nangia2020crows}, Social bias frames \cite{sap2019social}, Stereo Set \cite{nadeem2020stereoset}
     \begin{enumerate}
-        \item Not template based as in "This is [target]" and "they are [attribute]". As they are corwdsourced, they follow natural context.
-        \item All the three papers have been recently published.
+        \item Crowdsourcing have advantages over template based sentences such as "This is [target]" and "they are [attribute]", As they follow natural context. Crowdsourced datasets could capture wider range of stereotypes with better ecological validity when compared to template based or any NLP researcher could come up with. \cite{blodgett2021stereotyping}
+        \item All the three papers have been recently published (relative the period of starting thesis).
         \item Annotators have been asked to give realistic stereotype and anti-stereotype samples.
     \end{enumerate}
-    \item Stereotypes are considered with respect to historically disadvantaged groups as well as others provided in the list, hence the stereotypic sentences include positive stereotypes as well as negative stereotypes.
-    \item Stereotypes and anti-stereotype
+    \item The pitfalls regarding the data are discussed in the limitation section 
 \end{itemize}
 \section{Exploratory data analysis}\label{EDA}
+\begin{itemize}
+    \item Stereotypes are considered with respect to historically disadvantaged groups as well as others provided in the list, hence the stereotypic sentences include positive stereotypes as well as negative stereotypes.
+    \item 
+\end{itemize}
 \section{Data preparation}\label{data preparation}
     \begin{itemize}
         \item Target label definitions used in dataset
