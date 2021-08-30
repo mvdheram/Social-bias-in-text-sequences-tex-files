@@ -140,9 +140,18 @@ Questions:
             \item Text-CNN with GLove,flair embedding
             \item Random embedding with GRU and LSTM 
         \end{itemize}
+        \begin{itemize}
+            \item Lexicons, POS and NER tags 
+            \begin{itemize}
+                \item Generalization : Plural nouns (NNS,NNPS), articles, article(the) + adjective(Refer to the whole group), determiner, quantifier (many,few, several...), frequency adverbs (Generic sentences - usually, typically, generally, sometimes, always)
+                \item Subjectivity : strong subjectivity lexicon \cite{tangpersonalized}
+                \item Syntactic cues : Syntactic negation (describing Stereotype-inconsistent )
+            \end{itemize}
+        \end{itemize}
         \item Why these model?
     \end{itemize}
 \section{Evaluation metrics} \cite{tsoumakas2007multi}
+\cite{zhang2013review}
     \begin{itemize}
         \item Evaluation metrics selected for multi-label classification 
         \item Hamming loss 
