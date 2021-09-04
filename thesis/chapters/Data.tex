@@ -2,7 +2,7 @@
 
 In this chapter, the creation of stereotypical dataset is discussed, a brief description of   categories used with their interpretation is also pointed out along with an exploratory analysis of the data to gain some insights. In the section \ref{stereotypical dataset}, the details regarding the data creation as described in the sources are briefly covered. In the next section \ref{data preparation}, the pre-processing steps performed on the curated datasets, along the final target labels used, are discussed. In the last section \ref{EDA}, an exploratory analysis on the curated dataset is briefly described
 
-\section{Stereotypical dataset curation/creation??}\label{stereotypical dataset}
+\section{Stereotypical dataset}\label{stereotypical dataset}
 Stereotypical dataset creation and validation is not a straight forward task due to the multidimensionality and subjectivity involved with stereotypes. Upon some research, three datasets were selected which suits our goal of assessing stereotypes encoded in text sequences. The three datasets are Stereo Set \cite{nadeem2020stereoset}, Crowdsourced stereotype pairs (CrowS-Pairs) \cite{nangia2020crows}, Social bias frames \cite{sap2019social}. The main dataset used i.e. Steroset \cite{nadeem2020stereoset} contain crowdsourced stereotypical samples covering gender, profession, race and religion domains/categories. The dataset was mainly created to test the stereotypes encoded in the pre-trained language models. The main idea is to test the language modeling ability and stereotypical biases encoded using context association test (CAT). In CAT, given a contextual sample containing a target term belonging to one of the domains (e.g. housekeeper(profession)), the likelihood of the language model to choose either a stereotypically biased sample or an unrelated sample is tested \textbf{<- sentence to be checked??}. The stereotypically biased sample is further divided into stereotypical and anti-stereotypical. The idea behind creating anti-stereotype as described by the authors is to test whether the language model ranks the stereotypical contexts higher than anti-stereotypical contexts. E.g. stereotype context, "The chess player is ready to take a move. He is asian and nerdy" and anti-stereotype context "The chess player is ready to take a move. She is white and outgoing" should be equally possible without any bias. Anti-stereotype can be interpreted as a sample which violates the shared stereotype sample. Here, the stereotypical and anti-stereotypical associations are used to measure the encoded stereotypical biases in language model and unrelated association to measure the language modeling ability. Specifically, tests are carried at the sentence level (intrasentence) and at the discourse level (intersentence). Intrasentence tests are carried with fill-in-the-blank style context sentences describing the target group member, where a context can be filled with either stereotypical, anti-stereotypical or an unrelated attribute terms. At the intersentence level, a contextual sentence with target term can be instantiated either with stereotype, anti-stereotype and unrelated attribute sentences. In all the cases the maximum likelihood of the model to choose a particular attribute (stereo, anti-stereo, unrelated) is used as a measure. Based on this task, firstly the authors have collected target terms from the four domains namely gender, profession, race and religion using wikidata relation triples \cite{vrandevcic2014wikidata} which consists of <subject, relation, object> triples. They have collected all the objects with relation P106 (profession), P172
 (race), and P140 (religion) and gender terms from \cite{nosek2002math} as the target terms. For context association test samples, they employed crowdworkers (USA-based) via Amazon Mechanical Turk (AMT) to create both intrasentence and intersentence contexts containing target terms from the four domains gender, profession, race and religion corresponding to different social categories. The crowd workers are then asked to write stereotype, anti-stereotype and unrelated attribute terms for intrasentence and sentences for inter-sentence contexts corresponding to target terms as shown in table \ref{tab:stereoset}.  
 % E.g. :
@@ -25,7 +25,7 @@ Stereotypical dataset creation and validation is not a straight forward task due
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 % \usepackage{graphicx}
-\begin{table}[h!]
+\begin{table}[t!]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lllllll@{}}
 \toprule
@@ -67,7 +67,7 @@ present and agree on which sentence is more stereotypical\cite{nangia2020crows}.
 % \usepackage{booktabs}
 % \usepackage{graphicx}
 \begin{table}[]
-\resizebox{\textwidth}{!}{%
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}llll@{}}
 \toprule
 Bias\_type &
@@ -108,12 +108,11 @@ The datasets discussed in the previous sections were primarily created as benchm
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 % \usepackage{graphicx}
-\begin{table}[h!]
+\begin{table}[]
 \centering
-\captionsetup{justification=raggedright,singlelinecheck=false}
 \scalebox{0.4}{
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lr@{}}
 \toprule
 Bias type             & No. of samples                    \\ \midrule
 Ethnicity             & 2613                      \\
@@ -123,39 +122,120 @@ Religion              & 256                       \\
 Age                   & 73                        \\
 Sexual orientation    & 72                        \\
 Disability            & 57                        \\
-Physical appearance   & 52                        \\ \cmidrule(l){2-2} 
-\multicolumn{1}{l|}{} & \multicolumn{1}{l|}{5519} \\ \bottomrule
+Physical appearance   & 52                        \\ \bottomrule
+\addlinespace 
+Total                 & 5519 \\\bottomrule
+% \cmidrule(l){2-2} 
+% \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{5519} \\ \bottomrule
 \end{tabular}%
 }}
 \caption{Data statistics after combining  stereoset and corwspair datasets}
 \label{tab:Bias_type_stats}
 \end{table}
 
-As can be seen, bias types such as age, sexual orientation, disability, physical appearance have samples less than hundred and thus are omitted. Considering the 4 bias types i.e. Ethnicity, profession, gender and religion; religion bias type has lowest number of samples when compared to ethnicity. To handle this class imbalance, social bias frames dataset has been used. Firstly, social bias frames dataset consists of posts extracted from social media cites which needs to be pre-processed. Hence, the posts in Social bias frames were passed through the standard lexical pre-processing where in for each post, URL's, punctuation marks and non ascii characters are removed, then post is lowercased, and some special symbols found to be frequently appearing were removed. The goal is to extract characteristic target terms of the religion bias type from the combined dataset and use these terms as lexicons and check if the "targetMinority", a column of social bias inference corpus indicating the targeted minority group in the post, consists of the terms in the curated lexicons. The target terms of religion bias type (Sharia, Jihad, Christian, Muslim, Islam, Hindu, Mohammed, church, Bible, Quran, Brahmin, Holy, Trinity \cite{nadeem2020stereoset}) used in stereoset dataset along with some characteristic terms (muslim folks,jewish folks, arabic folks, islamics, christian folks) found to be used along with the stated religion terms were used as lexicons. In total, around 1691 posts were found and thus combined into the religion bias type of the combined dataset. In addition, though profession and gender bias types were segregated into two different categories, some samples of profession bias type targets with their stereotypic attribute were mainly based on gender. E.g. : For context sentence "A mathematician spoke at the conference", its stereotypic attribute sentence is "he was brilliant but gave a very dry speech" while anti-stereotype attribute sentence is "she was brilliant, creative..". Hence, all the samples of profession bias type where the attribute term is based on gender (He, she, man, woman) are collected and merged into gender bias type. For this, both the anti-stereotype and stereotype samples are considered and the difference between the two with respect to the terms are found out. If either of them differ by (he, she, man, woman), then the corresponding profession bias type sample is renamed to gender. Following this methodology, 253 samples of profession were changed to gender bias type.  The data statistics after pre-processing    
+As can be seen from the table \ref{tab:Bias_type_stats}, bias types such as age, sexual orientation, disability, physical appearance have samples less than hundred and thus are omitted. Considering the 4 bias types i.e. Ethnicity, profession, gender and religion; religion bias type has lowest number of samples when compared to ethnicity. To handle this class imbalance, social bias frames dataset has been used. Firstly, social bias frames dataset consists of posts extracted from social media cites which needs to be pre-processed. Hence, the posts in Social bias frames were passed through the standard lexical pre-processing where in for each post, URL's, punctuation marks and non ascii characters are removed, then post is lowercased, and some special symbols found to be frequently appearing were removed. The goal is to extract characteristic target terms of the religion bias type from the combined dataset and use these terms as lexicons and check if the "targetMinority", a column of social bias inference corpus indicating the targeted minority group in the post, consists of the terms in the curated lexicons. The target terms of religion bias type (Sharia, Jihad, Christian, Muslim, Islam, Hindu, Mohammed, church, Bible, Quran, Brahmin, Holy, Trinity \cite{nadeem2020stereoset}) used in stereoset dataset along with some characteristic terms (muslim folks,jewish folks, arabic folks, islamics, christian folks) found to be used along with the stated religion terms were used as lexicons. In total, around 1691 posts were found and thus combined into the religion bias type of the combined dataset. In addition, though profession and gender bias types were segregated into two different categories, some samples of profession bias type targets with their stereotypic attribute were mainly based on gender. E.g. : For context sentence "A mathematician spoke at the conference", its stereotypic attribute sentence is "he was brilliant but gave a very dry speech" while anti-stereotype attribute sentence is "she was brilliant, creative..". Hence, all the samples of profession bias type where the attribute term is based on gender (He, she, man, woman) are collected and merged into gender bias type. For this, both the anti-stereotype and stereotype samples are considered and the difference between the two with respect to the terms are found out. If either of them differ by (he, she, man, woman), then the corresponding profession bias type sample is renamed to gender. Following this methodology, 253 samples of profession were changed to gender bias type.  The data statistics after pre-processing    
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 % \usepackage{graphicx}
-\begin{table}[h!]
+\begin{table}[]
 \centering
 \scalebox{0.3}{
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lr@{}}
 \toprule
-Bias type             & Counts                    \\ \midrule
+Bias type             & No. of samples                    \\ \midrule
 Ethnicity             & 2613                      \\
 Profession            & 1556                      \\
 Gender                & 1012                      \\
-Religion              & 1947                      \\ \cmidrule(l){2-2} 
-\multicolumn{1}{l|}{} & \multicolumn{1}{l|}{7134} \\ \bottomrule
+Religion              & 1947                      \\\bottomrule
+\addlinespace
+Total                 & 7134                    \\ \bottomrule
+% \cmidrule(l){2-2} 
+% \multicolumn{1}{l|}{} & \multicolumn{1}{r|}{7134} \\ \bottomrule
 \end{tabular}%
 }}
 \caption{Data statistics after pre-processing }
 \label{tab:Bias_type_stats_preprocessing}
 \end{table}
 
-Hence, these four bias types namely ethnicity, profession, gender and religion are covered in this thesis. Ethnicity as a category is a combination of race and nationality and can be briefly defined as people who share a common social experience, cultural background or nationality\cite{peoples2014humanity}. Hence, stereotypes about different nationalities, cultures are covered in this category. Profession category covers stereotypes about different profession, E.g.  Physicist, civil servant, software developer etc. Gender category covers stereotypes with respect to male, female, mother. Gender stereotypes cover both prescriptive and descriptive components \cite{koenig2018comparing}. \cite{prentice2002women} paper states that gender stereotypes are highly Prescriptive, where stereotype covers about beliefs and expectancies about what men and women should do. Descriptive on the other hand covers about what men and women typically do. Hence, the gender bias type covers both prescriptive and descriptive stereotypes. Religion category covers stereotypes about Muslim, bible, Brahmin.
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1\columnwidth]{thesis/figures/Bias_type_barplot.png}
+    \caption{Plot of data statistics after pre-processing}
+    \label{fig:bias_type_barplot}
+\end{figure}
+
+Hence, these four bias types namely ethnicity, profession, gender and religion are covered in this thesis. Ethnicity as a category is a combination of race and nationality and can be briefly defined as people who share a common social experience, cultural background or nationality\cite{peoples2014humanity}. Hence, stereotypes about different nationalities, cultures are covered in this category. Profession category covers stereotypes about different profession, E.g.  Physicist, civil servant, software developer etc. Gender category covers stereotypes with respect to male, female, mother. Gender stereotypes in general cover both prescriptive and descriptive components \cite{koenig2018comparing}. \cite{prentice2002women} paper states that gender stereotypes are highly Prescriptive, where stereotype covers about beliefs and expectancies about what men and women should do. Descriptive on the other hand covers about what men and women typically do. Hence, the gender bias type covers both prescriptive and descriptive stereotypes. Religion category covers stereotypes about Muslim, bible, Brahmin.
 
 \section{Exploratory data analysis}\label{EDA}
 
-Exploratory data analysis is a statistical approach of organizing, plotting and summarizing a dataset which could be used to gain insights into the dataset. Considering stereotypes as shared social beliefs, it becomes important to study the crowdsourced data to gain more insights into the social perspective of stereotypes.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{thesis/figures/No_words.png}
+    \caption{Plot of data statistics after pre-processing}
+    \label{fig:No_words}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{thesis/figures/flesch_score.png}
+    \caption{Flesch readability score across bias types}
+    \label{fig:Flesch_scores}
+\end{figure}
+Exploratory data analysis is a statistical approach of organizing, plotting and summarizing a dataset which could be used to gain insights into the dataset. Considering stereotypes as shared social beliefs, it becomes important to study the crowdsourced data to gain more insights into the connotation and perspectives of stereotypes. Some characteristic features such as readability, generalization, characteristic terms and their attributes pertaining to stereotypes are discussed in this section.
+Firstly, addressing the basic summary statics, four types of biases namely ethnicity, gender, profession and religion are covered. As seen from the plot \ref{fig:No_words}, the average number of words per bias type remain in the range of 10 to 20 indicating that the crowdsourced stereotypical samples covers mostly overt stereotypical samples with respect to target term and corresponding attributes (as the task given to the crowd workers itself suggests). 
+
+
+
+Readability tests are the tests used to evaluate the ease of understanding and comprehension of English text passages \cite{barnett1979readability}. The scale ranges from primary school up to college level graduates which utilizes mathematical formula based on word, syllable and sentence count.  One of the measures is using Flesch reading ease formula \cite{flesch1948new}. The score ranges from 0 to 100 and the higher the score, the better the readability. Scores ranging from 0-30 indicate only college level graduates can understand, while 90-100 implies that a 5th grade student can understand. Figure \ref{fig:Flesch_scores} again shows that the stereotypical samples are more overt based on target terms due to the fact that the scores are in the range of 80-100 indicating a 5th grade student can understand the samples.
+% \pagebreak
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{thesis/figures/sentiment_scores.png}
+    \caption{Over all positive negative neutral scores based on vader compound scores}
+    \label{fig:sentiment_scores}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{thesis/figures/sentiment_scores_boxplot.png}
+    \caption{Label wise sentiment scores using boxplot}
+    \label{fig:label_wise_sentiment}
+\end{figure}
+
+Sentiment analysis is performed to measure the association of stereotype with negative. Figure \ref{fig:sentiment_scores}, shows the overall positive, negative, neutral scores calculated using vader sentiment analysis\footnote{\url{https://github.com/cjhutto/vaderSentiment}}. The compound score calculates the normalized weighted composite score based on the valence score of each lexicon. Threshold of 0.05 used for classifying into positive and negative and neutral labels. This indicates that stereotypes do not only associate with negative sentiment, but also to the positive sentiment as seen. Boxplots have been used to get an overview of the spread of positive and negative values per bias type. Box plots consists of rectangular box (indicating spread) where the upper hinge/ border (Q3) represent the 75th percentile while the lower hinge/border (Q1) represents 25th percentile \cite{kurzl1988exploratory}. The whiskers are used to indicate the maximum /minimum values and the points above whiskers are the outliers. Figure \ref{fig:label_wise_sentiment} shows the breakdown view of positive and negative scores per bias type. Overall, the plot shows that the distribution or spread of positive and negative samples remain almost same across different bias type with exception for gender bias type where q3(75th percentile - the upper limit of the boxplot) of negative scores is less when compared to positive scores. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{thesis/figures/20 most common plural Nouns.png}
+    \caption{20 most common Plural noun}
+    \label{fig:plural_nouns}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{thesis/figures/20 most common proper plural nouns.png}
+    \caption{20 most common Proper plural nouns}
+    \label{fig:Proper_plural_nouns}
+\end{figure}
+Considering the notion of generalization involved in the stereotype ("generalized impressions" \cite{burgers2020language}), Spacy (\url{https://spacy.io/}) POS tags (NNS - Plural nouns, NNPS - plural proper nouns) have been used to get insights into this perspective by extracting most common plural nouns and plural proper nouns used in the dataset. Figure \ref{fig:plural_nouns} shows an interesting observation, the frequency of the word "people" is strikingly high when compared to other plural nouns. With this observation, it can be inferred that generalization is involved, as a sentence with a proper noun followed by "people" (E.g. black people, Saudi Arabian people) indicate that the attribute is being generalized to the entire group /category. Figure \ref{fig:Proper_plural_nouns} indicates 20 most common proper plural nouns used in the dataset .
+
+One of visually appealing way of generating visualization for the tokens which appear with the highest frequency, have been word clouds \cite{heimerl2014word}. Word clouds provide a statistical summary of isolated words used in the corpus. Font size, weight and colors are used as properties to indicate the frequency of the words used in the corpus \cite{heimerl2014word}. Word clouds were used to visualize characteristic terms across the corpus as well as characteristic terms used in each bias type \ref{fig:word clouds}. The word clouds for each bias type can be found in the Appendix \ref{appendix}. Terms such as muslims, jew, people, man, woman are some of the characteristic terms which have higher frequency in the corpus.  
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\textwidth]{thesis/figures/Overall.png}
+    \caption{Word could generated for the entire corpus}
+    \label{fig:word clouds}
+\end{figure}
+\pagebreak
+Considering the attribute terms describing targets from each category (gender, ethnicity etc.).  Figure \ref{fig:Common_adj} lists 20 most common adjectives were extractedto get an insight into the most common attribute terms used in the dataset. 
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1\columnwidth]{thesis/figures/20 most common Adjectives.png}
+    \caption{20 most common adjectives}
+    \label{fig:Common_adj}
+\end{figure}

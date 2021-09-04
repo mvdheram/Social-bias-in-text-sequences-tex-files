@@ -3,3 +3,285 @@
 \section {Assessment using Sample based metrics}
 \section {Assessment using Label based metrics}
 
+\subsection{Language models}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\subsubsection{Micro average results}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Model name & \multicolumn{4}{c}{Micro average} \\ \midrule
+\multicolumn{1}{l|}{} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{f1-score} &
+  \multicolumn{1}{l|}{support} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{bert-base-uncased} &
+  \multicolumn{1}{l|}{0.8473019517795637} &
+  \multicolumn{1}{l|}{0.8518005540166205} &
+  \multicolumn{1}{l|}{0.8495452975710832} &
+  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{roberta-base} &
+  \multicolumn{1}{l|}{0.8923041368153455} &
+  \multicolumn{1}{l|}{\textbf{0.8912742382271468}} &
+  \multicolumn{1}{l|}{\textbf{0.8917888901720753}} &
+  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{gpt2} &
+  \multicolumn{1}{l|}{0.8778100072516316} &
+  \multicolumn{1}{l|}{0.5588642659279779} &
+  \multicolumn{1}{l|}{0.6829337094499295} &
+  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{xlnet-base-cased} &
+  \multicolumn{1}{l|}{\textbf{0.9133793103448276}} &
+  \multicolumn{1}{l|}{0.7643120960295475} &
+  \multicolumn{1}{l|}{0.8322231996983788} &
+  \multicolumn{1}{l|}{4332} \\ \bottomrule
+\end{tabular}
+}
+\caption{Micro average precision, recall and f1 scores}
+\label{tab:my-table}
+\end{table}
+\subsubsection{Macro average results}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[h!]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Model name &
+  \multicolumn{4}{c}{Macro average} \\ \midrule
+\multicolumn{1}{l|}{} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{f1-score} &
+  \multicolumn{1}{l|}{support} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{bert-base-uncased} &
+  \multicolumn{1}{l|}{0.8783981314327647} &
+  \multicolumn{1}{l|}{0.8712580721656895} &
+  \multicolumn{1}{l|}{0.8739276911310043} &
+  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{roberta-base} &
+  \multicolumn{1}{l|}{0.9091118957769646} &
+  \multicolumn{1}{l|}{\textbf{0.9070609818525238}} &
+  \multicolumn{1}{l|}{\textbf{ 0.9075084865461823}} &
+  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{gpt2} &
+  \multicolumn{1}{l|}{0.8515018016212029} &
+  \multicolumn{1}{l|}{0.6114231840818027} &
+  \multicolumn{1}{l|}{0.6828126561227609} &
+  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{l|}{xlnet-base-cased} &
+  \multicolumn{1}{l|}{\textbf{0.9132213310057649}} &
+  \multicolumn{1}{l|}{0.8046776860357208} &
+  \multicolumn{1}{l|}{0.8466299043854991} &
+  \multicolumn{1}{l|}{4332} \\ \bottomrule
+\end{tabular}
+}
+\caption{Macro average precision, recall and f1 scores
+ }
+\label{tab:Macro_avg_LM}
+\end{table}
+
+\subsection{Baselines}
+
+\subsubsection{Micro average results}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}clllll@{}}
+\toprule
+\multicolumn{1}{l}{Model name} &
+  Text features &
+  \multicolumn{4}{c}{Micro average} \\ \midrule
+\multicolumn{2}{l}{} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{f1-score} &
+  \multicolumn{1}{l|}{support} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{3}{*}{CNN}} &
+  \multicolumn{1}{l|}{Flair word embedding} &
+  \multicolumn{1}{l|}{0.48973225890304134} &
+  \multicolumn{1}{l|}{0.43490304709141275} &
+  \multicolumn{1}{l|}{0.46069201613889227} &
+  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Glove word embedding} &
+  \multicolumn{1}{l|}{0.43255549231644846} &
+  \multicolumn{1}{l|}{0.3508771929824561} &
+  \multicolumn{1}{l|}{0.38745857761916896} &
+  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Fasttext word embedding} &
+  \multicolumn{1}{l|}{0.41004497751124436} &
+  \multicolumn{1}{l|}{0.37880886426592797} &
+  \multicolumn{1}{l|}{0.3938084953203743} &
+  \multicolumn{1}{l|}{4332.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{MNB}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.7321135350692001} &
+  \multicolumn{1}{l|}{\textbf{0.7206187947356268}} &
+  \multicolumn{1}{l|}{\textbf{0.726320688852688}} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{\textbf{0.8333333333333334}} &
+  \multicolumn{1}{l|}{0.4767951974139921} &
+  \multicolumn{1}{l|}{0.6065501542076664} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{SVM} &
+  \multicolumn{1}{l|}{Selected features} &
+  \multicolumn{1}{l|}{0.7591623036649214} &
+  \multicolumn{1}{l|}{0.43523435696144075} &
+  \multicolumn{1}{l|}{0.5532726739066627} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{Decision tree}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.6506704304869443} &
+  \multicolumn{1}{l|}{0.6386515816208728} &
+  \multicolumn{1}{l|}{0.6446049871824749} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_df} &
+  \multicolumn{1}{l|}{0.7255542590431738} &
+  \multicolumn{1}{l|}{0.7178480720387901} &
+  \multicolumn{1}{l|}{0.7216805942432682} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{KNN}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.6107086614173228} &
+  \multicolumn{1}{l|}{0.44770260909720616} &
+  \multicolumn{1}{l|}{0.5166533439914734} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.4688466637207247} &
+  \multicolumn{1}{l|}{0.24497806511198336} &
+  \multicolumn{1}{l|}{0.32180770397330904} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{Random Forest}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.742678512668641} &
+  \multicolumn{1}{l|}{0.5211267605633803} &
+  \multicolumn{1}{l|}{0.612483039348711} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_df} &
+  \multicolumn{1}{l|}{0.7766990291262136} &
+  \multicolumn{1}{l|}{0.6280304779496652} &
+  \multicolumn{1}{l|}{0.6944976381973701} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|l|}{Bi-LSTM} &
+  \multicolumn{1}{l|}{Random word ebmedding} &
+  \multicolumn{1}{l|}{0.4737903225806452} &
+  \multicolumn{1}{l|}{0.3797322253000923} &
+  \multicolumn{1}{l|}{0.4215786776012301} &
+  \multicolumn{1}{l|}{4332.0} \\ \bottomrule
+\end{tabular}%
+}
+\caption{Micro average scores}
+\label{tab:Micro-average}
+\end{table}
+
+\subsubsection{Macro average results}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}clllll@{}}
+\toprule
+\multicolumn{1}{l}{Model Name} &
+  Text features &
+  \multicolumn{4}{c}{Macro average} \\ \midrule
+\multicolumn{1}{l}{} &
+  \multicolumn{1}{l|}{} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{f1-score} &
+  \multicolumn{1}{l|}{support} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{3}{*}{CNN}} &
+  \multicolumn{1}{l|}{Flair word embeddings} &
+  \multicolumn{1}{l|}{0.4707581959482754} &
+  \multicolumn{1}{l|}{0.440353359802024} &
+  \multicolumn{1}{l|}{0.4453560677568051} &
+  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Glove word embedding} &
+  \multicolumn{1}{l|}{0.37714507704597927} &
+  \multicolumn{1}{l|}{0.3332984618378458} &
+  \multicolumn{1}{l|}{0.333853650644168} &
+  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Fasttext word embedding} &
+  \multicolumn{1}{l|}{0.3953778279026942} &
+  \multicolumn{1}{l|}{0.36789901294047217} &
+  \multicolumn{1}{l|}{0.36598027314421216} &
+  \multicolumn{1}{l|}{4332.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{MNB}} &
+  \multicolumn{1}{l|}{Bag of word} &
+  \multicolumn{1}{l|}{0.759323788076668} &
+  \multicolumn{1}{l|}{0.7387751356613154} &
+  \multicolumn{1}{l|}{0.7465872781807842} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{\textbf{0.8589890196001617}} &
+  \multicolumn{1}{l|}{0.4396922334334639} &
+  \multicolumn{1}{l|}{0.5542120343015503} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{SVM} &
+  \multicolumn{1}{l|}{Selected features} &
+  \multicolumn{1}{l|}{0.6703081342283921} &
+  \multicolumn{1}{l|}{0.43642679356309977} &
+  \multicolumn{1}{l|}{0.5079788761483882} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{Decision tree}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.6863092356531861} &
+  \multicolumn{1}{l|}{0.6631057239385393} &
+  \multicolumn{1}{l|}{0.6728741288912851} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.7570596244075884} &
+  \multicolumn{1}{l|}{\textbf{0.7437090235822891}} &
+  \multicolumn{1}{l|}{\textbf{0.7496326187263594}} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{2}{*}{KNN}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.6799534225646005} &
+  \multicolumn{1}{l|}{0.45184631377295326} &
+  \multicolumn{1}{l|}{0.5133651862257996} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.67397875838546} &
+  \multicolumn{1}{l|}{0.25389793267234245} &
+  \multicolumn{1}{l|}{0.3015757205070135} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{Random Forest}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.7975496926998226} &
+  \multicolumn{1}{l|}{0.5371770219486752} &
+  \multicolumn{1}{l|}{0.6331819893966618} &
+  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.8132845806835837} &
+  \multicolumn{1}{l|}{0.6525195234180539} &
+  \multicolumn{1}{l|}{0.7167577950481748} &
+  \multicolumn{1}{l|}{4331.0} \\ \midrule
+\multicolumn{1}{|c|}{Bi-LSTM} &
+  \multicolumn{1}{l|}{Random word embedding} &
+  \multicolumn{1}{l|}{0.42381624795652967} &
+  \multicolumn{1}{l|}{0.3426061177159399} &
+  \multicolumn{1}{l|}{0.3621467884567406} &
+  \multicolumn{1}{l|}{4332.0} \\ \bottomrule
+\end{tabular}%
+}
+\caption{Macro average scores of baselines}
+\label{tab:Macro-avg-baselines}
+\end{table}
