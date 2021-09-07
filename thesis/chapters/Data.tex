@@ -227,18 +227,22 @@ Sentiment analysis is performed to measure the association of stereotype with ne
     \caption{20 most common Proper plural nouns}
     \label{fig:Proper_plural_nouns}
 \end{figure}
+
+
+
 Considering the notion of generalization involved in the stereotype ("generalized impressions" \cite{burgers2020language}), Spacy (\url{https://spacy.io/}) POS tags (NNS - Plural nouns, NNPS - plural proper nouns) have been used to get insights into this perspective by extracting most common plural nouns and plural proper nouns used in the dataset. Figure \ref{fig:plural_nouns} shows an interesting observation, the frequency of the word "people" is strikingly high when compared to other plural nouns. With this observation, it can be inferred that generalization is involved, as a sentence with a proper noun followed by "people" (E.g. black people, Saudi Arabian people) indicate that the attribute is being generalized to the entire group /category. Figure \ref{fig:Proper_plural_nouns} indicates 20 most common proper plural nouns used in the dataset out of which jews and muslims are the most used proper plural noun belonging to religion.
 
-One of visually appealing way of generating visualization for the tokens which appear with the highest frequency, have been word clouds \cite{heimerl2014word}. Word clouds provide a statistical summary of isolated words used in the corpus. Font size, weight and colors are used as properties to indicate the frequency of the words used in the corpus \cite{heimerl2014word}. Word clouds were used to visualize characteristic terms across the corpus as well as characteristic terms used in each bias type \ref{fig:word clouds}. The word clouds for each bias type can be found in the Appendix \ref{appendix}. Terms such as muslims, jew, people, man, woman are some of the characteristic terms which have higher frequency in the corpus.  
+\pagebreak
 
-\begin{figure}[]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{thesis/figures/Overall.png}
+    \includegraphics[width=0.6\textwidth]{thesis/figures/Overall.png}
     \caption{Word could generated for the entire corpus}
     \label{fig:word clouds}
 \end{figure}
-\pagebreak
-Considering the attribute terms describing targets from each category (gender, ethnicity etc.).  Figure \ref{fig:Common_adj} lists 20 most common adjectives,were extracted to get an insight into the most common attribute terms used in the dataset. From the figure, it shows that apart from black, the term 'many' was used which again indicates that there is some generalization involved in the stereotypical sentences.  
+
+
+One of visually appealing way of generating visualization for the tokens which appear with the highest frequency, have been word clouds \cite{heimerl2014word}. Word clouds provide a statistical summary of isolated words used in the corpus. Font size, weight and colors are used as properties to indicate the frequency of the words used in the corpus \cite{heimerl2014word}. Word clouds were used to visualize characteristic terms across the corpus as well as characteristic terms used in each bias type \ref{fig:word clouds}. The word clouds for each bias type can be found in the Appendix \ref{appendix}. Terms such as muslims, jew, people, man, woman are some of the characteristic terms which have higher frequency in the corpus.  
 
 \begin{figure}[]
     \centering
@@ -246,3 +250,6 @@ Considering the attribute terms describing targets from each category (gender, e
     \caption{20 most common adjectives}
     \label{fig:Common_adj}
 \end{figure}
+
+Considering the attribute terms describing targets from each category (gender, ethnicity etc.).  Figure \ref{fig:Common_adj} lists 20 most common adjectives,were extracted to get an insight into the most common attribute terms used in the dataset. From the figure, it shows that apart from black, the term 'many' was used which again indicates that there is some generalization involved in the stereotypical sentences.  
+

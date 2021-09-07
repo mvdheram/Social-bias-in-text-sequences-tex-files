@@ -4,13 +4,221 @@
 All the pretrained models have been used from huggingface library \footnote{\url{https://huggingface.co/transformers/pretrained_models.html}} and experiments were done using PyTorch lightening, huggingface and Ktrain (a wrapper around huggingface and keras) to fine tune the language model for the downstream task i.e. multi label text classification. Finally, the results for BERT and RoBERTa were considered from the Ktrain library and for XLNet and GPT-2 the results were considered form using huggingface library.
 
 \textbf{Threshold calibration}
-\section {Assessment using Sample based metrics}
-\section {Assessment using Label based metrics}
 
-\subsection{Language models}
+% \section {Assessment using Sample based metrics}
+\pagebreak
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
-\subsubsection{Micro average results}
+% \usepackage{graphicx}
+\begin{table}[]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llll@{}}
+\toprule
+Model name  & \multicolumn{3}{l}{Sample Average}  \\ \midrule
+\multicolumn{1}{l|}{} & \multicolumn{1}{l|}{precision} & \multicolumn{1}{l|}{recall} & \multicolumn{1}{l|}{f1-score} \\ \cmidrule(l){2-4} 
+\multicolumn{1}{l|}{bert-base-uncased} & \multicolumn{1}{l|}{0.8666129898013957} & \multicolumn{1}{l|}{0.8659420289855072} & \multicolumn{1}{l|}{0.8624127750939347} \\ \cmidrule(l){2-4} 
+\multicolumn{1}{l|}{roberta-base}      & \multicolumn{1}{l|}{0.9024422973698335} & \multicolumn{1}{l|}{\textbf{0.9013687600644122}} & \multicolumn{1}{l|}{\textbf{0.901207729468599}}  \\ \cmidrule(l){2-4} 
+\multicolumn{1}{l|}{gpt2}              & \multicolumn{1}{l|}{0.7897208803005905} & \multicolumn{1}{l|}{0.5940016103059581} & \multicolumn{1}{l|}{0.6582125603864735} \\ \cmidrule(l){2-4} 
+\multicolumn{1}{l|}{xlnet-base-cased}  & \multicolumn{1}{l|}{\textbf{0.9118357487922706}} & \multicolumn{1}{l|}{0.7866344605475041} & \multicolumn{1}{l|}{0.8283682232957594} \\ \bottomrule
+\end{tabular}%
+}
+\caption{Sample average results of Language models}
+\label{tab:sample_avg_LM}
+\end{table}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{graphicx}
+\begin{table}[]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}l|r|r|r|r|@{}}
+\toprule
+Model name & hamming\_loss       & subset\_accuracy    & hamming\_score/Accuracy & AUC\_ROC\_score   \\ \midrule
+bert-base-uncased & 0.07516678168852083  & 0.7137681159420289 & 0.8200483091787394 & 0.9626277574452198 \\ \cmidrule(l){2-5} 
+roberta-base      & \textbf{0.053887738670347365} & \textbf{0.8188405797101449} & \textbf{0.8748322597960254} & \textbf{0.9772590840158893} \\ \cmidrule(l){2-5} 
+gpt2       & 0.12928456406717276 & 0.36312399355877617 & 0.5830314009661832      & 0.915561449404918 \\ \cmidrule(l){2-5} 
+xlnet-base-cased  & 0.07677708764665286  & 0.6203703703703703 & 0.7729468599033793 & 0.9650743405392912 \\ \bottomrule
+\end{tabular}%
+}
+\caption{Hamming loss, hamming score, subset accuracy, AUC\_ROC score of Language models}
+\label{tab:my-table}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Model name &
+  Text features &
+  \multicolumn{3}{l}{Sample average} \\ \midrule
+ &
+  \multicolumn{1}{l|}{} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{f1-score} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{3}{*}{CNN}} &
+  \multicolumn{1}{l|}{Flair embedding model} &
+  \multicolumn{1}{l|}{0.474838969} &
+  \multicolumn{1}{l|}{0.468196457} &
+  \multicolumn{1}{l|}{0.467377885} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Glove embedding model} &
+  \multicolumn{1}{l|}{0.411567364} &
+  \multicolumn{1}{l|}{0.39452496} &
+  \multicolumn{1}{l|}{0.399436393} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Fasttext embedding model} &
+  \multicolumn{1}{l|}{0.407306763} &
+  \multicolumn{1}{l|}{0.400563607} &
+  \multicolumn{1}{l|}{0.401959206} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{MNB}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.738353079} &
+  \multicolumn{1}{l|}{0.731280193} &
+  \multicolumn{1}{l|}{0.718108913} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.62003489} &
+  \multicolumn{1}{l|}{0.492753623} &
+  \multicolumn{1}{l|}{0.534889962} \\ \midrule
+\multicolumn{1}{|l|}{SVM} &
+  \multicolumn{1}{l|}{Selected featurres} &
+  \multicolumn{1}{l|}{0.578166935} &
+  \multicolumn{1}{l|}{0.45873591} &
+  \multicolumn{1}{l|}{0.4965781} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{Decision tree}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.676731079} &
+  \multicolumn{1}{l|}{0.676529791} &
+  \multicolumn{1}{l|}{0.676596887} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{\textbf{0.745169082}} &
+  \multicolumn{1}{l|}{\textbf{0.744967794}} &
+  \multicolumn{1}{l|}{\textbf{0.74503489}} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{KNN}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.542874396} &
+  \multicolumn{1}{l|}{0.498590982} &
+  \multicolumn{1}{l|}{0.51335212} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.330515298} &
+  \multicolumn{1}{l|}{0.308172303} &
+  \multicolumn{1}{l|}{0.315619968} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{Random Forest}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.65599839} &
+  \multicolumn{1}{l|}{0.569041868} &
+  \multicolumn{1}{l|}{0.598027375} \\ \cmidrule(l){2-5} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{0.736513688} &
+  \multicolumn{1}{l|}{0.665458937} &
+  \multicolumn{1}{l|}{0.689143854} \\ \bottomrule
+\end{tabular}%
+}
+\caption{Sample average scores of baselines}
+\label{tab:Sample average scores}
+\end{table}
+
+\begin{table}[h!]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Model\_name &
+  Text features &
+  hamming\_loss &
+  subset\_accuracy &
+  hamming\_score &
+  AUC\_ROC\_score \\ \midrule
+\multicolumn{1}{|l|}{\multirow{3}{*}{CNN}} &
+  \multicolumn{1}{l|}{Flair word embedding} &
+  \multicolumn{1}{l|}{0.25368069933287324} &
+  \multicolumn{1}{l|}{0.3333333333333333} &
+  \multicolumn{1}{l|}{0.4270330112721436} &
+  \multicolumn{1}{l|}{0.7011929221217658} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Glove word embedding} &
+  \multicolumn{1}{l|}{0.27639751552795033} &
+  \multicolumn{1}{l|}{0.28140096618357485} &
+  \multicolumn{1}{l|}{0.3626207729468618} &
+  \multicolumn{1}{l|}{0.6437790877549151} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Fasttext word embedding} &
+  \multicolumn{1}{l|}{0.29054520358868186} &
+  \multicolumn{1}{l|}{0.26811594202898553} &
+  \multicolumn{1}{l|}{0.35874261943102803} &
+  \multicolumn{1}{l|}{0.6219138829221451} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{MNB}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{\textbf{0.13526570048309178}} &
+  \multicolumn{1}{l|}{0.45450885668276975} &
+  \multicolumn{1}{l|}{0.648364772640133} &
+  \multicolumn{1}{l|}{0.8208915654153975} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf-idf} &
+  \multicolumn{1}{l|}{0.15407177363699104} &
+  \multicolumn{1}{l|}{0.32286634460547503} &
+  \multicolumn{1}{l|}{0.4786298980139564} &
+  \multicolumn{1}{l|}{0.7008640200213978} \\ \midrule
+\multicolumn{1}{|l|}{SVM} &
+  \multicolumn{1}{l|}{Selected features} &
+  \multicolumn{1}{l|}{0.17506326201978376} &
+  \multicolumn{1}{l|}{0.2741545893719807} &
+  \multicolumn{1}{l|}{0.4379696725711228} &
+  \multicolumn{1}{l|}{0.692698582788536} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{Decision tree}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.17540832758224062} &
+  \multicolumn{1}{l|}{0.4887278582930757} &
+  \multicolumn{1}{l|}{0.6139962426194246} &
+  \multicolumn{1}{l|}{0.7674628564064679} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf-idf} &
+  \multicolumn{1}{l|}{0.13791120312859442} &
+  \multicolumn{1}{l|}{\textbf{0.5837359098228664}} &
+  \multicolumn{1}{l|}{\textbf{0.6912909286097624}} &
+  \multicolumn{1}{l|}{\textbf{0.8211309657175957}} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{KNN}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.20864964343225212} &
+  \multicolumn{1}{l|}{0.35829307568438} &
+  \multicolumn{1}{l|}{0.46658615136876125} &
+  \multicolumn{1}{l|}{0.6732183869305738} \\ \cmidrule(l){2-6} 
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf-idf} &
+  \multicolumn{1}{l|}{0.25718886588451806} &
+  \multicolumn{1}{l|}{0.2608695652173913} &
+  \multicolumn{1}{l|}{0.29985238862050506} &
+  \multicolumn{1}{l|}{0.5795307836306697} \\ \midrule
+\multicolumn{1}{|l|}{\multirow{2}{*}{Random Forest}} &
+  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{0.1642512077294686} &
+  \multicolumn{1}{l|}{0.36594202898550726} &
+  \multicolumn{1}{l|}{0.5303274288781523} &
+  \multicolumn{1}{l|}{0.7328031095030783} \\ \cmidrule(l){2-6}
+\multicolumn{1}{|l|}{} &
+  \multicolumn{1}{l|}{Tf-idf} &
+  \multicolumn{1}{l|}{0.1376236484932137} &
+  \multicolumn{1}{l|}{0.47987117552334946} &
+  \multicolumn{1}{l|}{0.6272812667740167} &
+  \multicolumn{1}{l|}{0.7910640875745566} \\ \bottomrule
+\end{tabular}%
+}
+\caption{Hamming loss, hamming score, subset accuracy, AUC\_ROC scores of baselines}
+\label{tab:sample_based_baseline}
+\end{table}
+
+% \pagebreak
+% \section {Assessment using Label based metrics}
+
+% \subsection{Language models}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \subsubsection{Micro average results}
+
 \begin{table}[h!]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}lllll@{}}
@@ -46,7 +254,7 @@ Model name & \multicolumn{4}{c}{Micro average} \\ \midrule
 \caption{Micro average precision, recall and f1 scores}
 \label{tab:my-table}
 \end{table}
-\subsubsection{Macro average results}
+% \subsubsection{Macro average results}
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 % \usepackage[table,xcdraw]{xcolor}
@@ -89,9 +297,9 @@ Model name &
 \label{tab:Macro_avg_LM}
 \end{table}
 
-\subsection{Baselines}
+% \subsection{Baselines}
 
-\subsubsection{Micro average results}
+% \subsubsection{Micro average results}
 \begin{table}[h!]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}clllll@{}}
@@ -188,7 +396,7 @@ Model name &
 \label{tab:Micro-average}
 \end{table}
 
-\subsubsection{Macro average results}
+% \subsubsection{Macro average results}
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 % \usepackage{multirow}
