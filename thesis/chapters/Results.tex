@@ -1,20 +1,19 @@
 \chapter{Results}
 
-\textbf{Technical details}
-All the pretrained models have been used from huggingface library \footnote{\url{https://huggingface.co/transformers/pretrained_models.html}} and experiments were done using PyTorch lightening, huggingface and Ktrain (a wrapper around huggingface and keras) to fine tune the language model for the downstream task i.e. multi label text classification. Finally, the results for BERT and RoBERTa were considered from the Ktrain library and for XLNet and GPT-2 the results were considered form using huggingface library.
+This chapter discusses the results obtained after training pre-trained language models and baselines. The results are evaluated with sample based metrics. Visual plots are generated along with the tabular results for better interpretation. 
+\\
+\\
+All the models have been evaluated on both sample based and label based metrics, out of which, sample based metrics are chosen as main evaluation metrics which will be discussed in this section as label based metrics would fail to address the correlation among different classes \cite{zhang2010multi}. Evaluation results using label based metrics can be found in the appendix \ref{appendix}.
 
-\textbf{Threshold calibration}
+Most of the multi label learning algorithms return real valued function \cite{zhang2010multi}. These real valued outputs (mostly probabilities) returned by models need to calibrated against the threshold to decide on the proper or hard label. A popular choice of constant is using 0.5, when the outputs represent posterior probabilities\cite{zhang2010multi}. In this thesis, a threshold of 0.5 is used to convert the real valued posterior probabilities into proper labels. Experiments have been performed on calculating optimal threshold per class by using criterion which maximizes true positive rate and true negative rate. The results obtained from the two thresholds were calculated, and the results have marginal difference  in precision and recall (slightly higher recall for the optimal threshold); which is precision-recall trade off. Finally, 0.5 was chosen as threshold. All the language models and baseline models have been tested on the same test split using both sample based and label based metrics for fair comparison. 
 
-% \section {Assessment using Sample based metrics}
-\pagebreak
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage{graphicx}
-\begin{table}[]
+\section{Sample-based metrics}
+% All the pretrained models have been used from huggingface library \footnote{\url{https://huggingface.co/transformers/pretrained_models.html}} and experiments were done using PyTorch lightening, huggingface and Ktrain (a wrapper around huggingface and keras) to fine tune the language model for the downstream task i.e. multi label text classification. Finally, the results BERT and RoBERTa were considered from the Ktrain library and for XLNet and GPT-2 the results were considered form using huggingface library.
+\begin{table}[h!]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llll@{}}
 \toprule
-Model name  & \multicolumn{3}{l}{Sample Average}  \\ \midrule
+Model name  & \multicolumn{3}{c}{Sample Average}  \\ \midrule
 \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{precision} & \multicolumn{1}{l|}{recall} & \multicolumn{1}{l|}{f1-score} \\ \cmidrule(l){2-4} 
 \multicolumn{1}{l|}{bert-base-uncased} & \multicolumn{1}{l|}{0.8666129898013957} & \multicolumn{1}{l|}{0.8659420289855072} & \multicolumn{1}{l|}{0.8624127750939347} \\ \cmidrule(l){2-4} 
 \multicolumn{1}{l|}{roberta-base}      & \multicolumn{1}{l|}{0.9024422973698335} & \multicolumn{1}{l|}{\textbf{0.9013687600644122}} & \multicolumn{1}{l|}{\textbf{0.901207729468599}}  \\ \cmidrule(l){2-4} 
@@ -22,28 +21,52 @@ Model name  & \multicolumn{3}{l}{Sample Average}  \\ \midrule
 \multicolumn{1}{l|}{xlnet-base-cased}  & \multicolumn{1}{l|}{\textbf{0.9118357487922706}} & \multicolumn{1}{l|}{0.7866344605475041} & \multicolumn{1}{l|}{0.8283682232957594} \\ \bottomrule
 \end{tabular}%
 }
-\caption{Sample average results of Language models}
+\caption{Sample average precision, recall, f1-score results of Language models with top results highlighted}
 \label{tab:sample_avg_LM}
 \end{table}
 
+Table \ref{tab:sample_avg_LM} shows the results obtained by using sample - based metrics on the test set using language models. The sample average precision of xlnet language model is highest when compared to other model. When coming to sample average recall and f1-score, roberta scores higher than other models. On the average, roberta has stable score of precision, recall when compared to xlnet. Though the precision of xlnet model was marginally better by around 1.04\%, the recall score had a drop of 12.7\%  which resulted in 8.08\% drop in the f1-score when compared to roberta. Figure \ref{fig:model_wise_group_LM} shows this property of variance in precision, recall and f1-score for each model. An interesting property is that bert and roberta language models tend to have low variance in their precsion, recall and f1scores when compared to gpt-2 or xlnet. On average, there is a 4\% difference among precision, recall and f1-scores between bert and roberta models. Gpt-2 is the worst performing language model among others, with a very low recall(34.1\% less recall when compared to roberta). Figure \ref{fig:label_wise_group_LM} shows a label wise plot of different language models. On average, precision scores of the different language models seems to be higher when compared to recall. To give an overall rank based on sample average f1-score, roberta is the best performing model followed by bert (4.3\% decrease) followed by xlnet (8.08\% decrease) and gpt-2 (26.9\% decrease). 
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\textwidth]{thesis/figures/Model_wise_prf .png}
+    \caption{Sample average precision, recall and f1score grouped model wise }
+    \label{fig:model_wise_group_LM}
+\end{figure}
 
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage{graphicx}
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.8\textwidth]{thesis/figures/labelwise_wise_prf.png}
+    \caption{Sample average precision, recall and f1score grouped label wise }
+    \label{fig:label_wise_group_LM}
+\end{figure}
+\pagebreak
+
 \begin{table}[]
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}l|r|r|r|r|@{}}
+\begin{tabular}{@{}l|l|l|l|@{}}
 \toprule
-Model name & hamming\_loss       & subset\_accuracy    & hamming\_score/Accuracy & AUC\_ROC\_score   \\ \midrule
-bert-base-uncased & 0.07516678168852083  & 0.7137681159420289 & 0.8200483091787394 & 0.9626277574452198 \\ \cmidrule(l){2-5} 
-roberta-base      & \textbf{0.053887738670347365} & \textbf{0.8188405797101449} & \textbf{0.8748322597960254} & \textbf{0.9772590840158893} \\ \cmidrule(l){2-5} 
-gpt2       & 0.12928456406717276 & 0.36312399355877617 & 0.5830314009661832      & 0.915561449404918 \\ \cmidrule(l){2-5} 
-xlnet-base-cased  & 0.07677708764665286  & 0.6203703703703703 & 0.7729468599033793 & 0.9650743405392912 \\ \bottomrule
+Model name & hamming\_loss       & subset\_accuracy    & hamming\_score/Accuracy   \\ \midrule
+bert-base-uncased & 0.07516678168852083  & 0.7137681159420289 & 0.8200483091787394 \\ \cmidrule(l){2-4} 
+roberta-base      & \textbf{0.053887738670347365} & \textbf{0.8188405797101449} & \textbf{0.8748322597960254} \\ \cmidrule(l){2-4} 
+gpt2       & 0.12928456406717276 & 0.36312399355877617 & 0.5830314009661832      \\ \cmidrule(l){2-4} 
+xlnet-base-cased  & 0.07677708764665286  & 0.6203703703703703 & 0.7729468599033793  \\ \bottomrule
 \end{tabular}%
 }
-\caption{Hamming loss, hamming score, subset accuracy, AUC\_ROC score of Language models}
-\label{tab:my-table}
+\caption{Hamming loss, hamming score, subset accuracy scores of Language models}
+\label{tab:hhaa}
 \end{table}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{thesis/labelwise_hhaa_adjusted.png}
+    \caption{Hamming loss, hamming score, subset accuracy scores of language models grouped label wise }
+    \label{fig:label_wise_group}
+\end{figure}
+
+Table \ref{tab:hhaa} shows the hamming loss, subset accuracy, hamming score results obtained on test set along with AUC\_ROC score. Hamming loss as discussed is the "average per-sample per-class total error" \cite{sokolova2009systematic}. The lower the hamming loss, the lesser are the misprediction. As highlighted, in the table, roberta has the lowest hamming loss followed by bert which has 39.4\% greater hamming loss and xlnet which has 42.4\% greater hamming loss when compared to roberta. GPT-2 has the highest hamming loss. Coming to subset accuracy, which is a harsh measure where the exact match per text is calculated; roberta has the highest subset accuracy score of around 81\%. Roberta is followed by bert whose subset accuracy is 12.8\% less when compared to roberta followed by xlnet (24.2\% decrease) and gpt-2 (55.6\% decrease). Hamming score (average per-sample partial matches) follows the same pattern where roberta has the highest score followed by bert, xlnet and gpt-2. For roberta, there is a 6.8\% increase in accuracy when considering partial matches (hamming score) rather than exact matches (subset accuracy); 14.89\% increase for bert, 24.59\% for xlnet and 60.55\% for GPT-2.
+Overall, a clear pattern can be observed from the measures as well as with the visual plot \ref{fig:label_wise_group}. Looking at metrics grouped label wise, similar ranking can be found for each metric where roberta is the best performing model followed by bert followed by xlnet and gpt-2 where roberta outperforms other models.
+\pagebreak
 
 \begin{table}[h!]
 \resizebox{\textwidth}{!}{%
@@ -51,7 +74,7 @@ xlnet-base-cased  & 0.07677708764665286  & 0.6203703703703703 & 0.77294685990337
 \toprule
 Model name &
   Text features &
-  \multicolumn{3}{l}{Sample average} \\ \midrule
+  \multicolumn{3}{c}{Sample average} \\ \midrule
  &
   \multicolumn{1}{l|}{} &
   \multicolumn{1}{l|}{precision} &
@@ -73,12 +96,12 @@ Model name &
   \multicolumn{1}{l|}{0.400563607} &
   \multicolumn{1}{l|}{0.401959206} \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{MNB}} &
-  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{BOW} &
   \multicolumn{1}{l|}{0.738353079} &
   \multicolumn{1}{l|}{0.731280193} &
   \multicolumn{1}{l|}{0.718108913} \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{TF\_IDF} &
   \multicolumn{1}{l|}{0.62003489} &
   \multicolumn{1}{l|}{0.492753623} &
   \multicolumn{1}{l|}{0.534889962} \\ \midrule
@@ -88,40 +111,63 @@ Model name &
   \multicolumn{1}{l|}{0.45873591} &
   \multicolumn{1}{l|}{0.4965781} \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{Decision tree}} &
-  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{BOW} &
   \multicolumn{1}{l|}{0.676731079} &
   \multicolumn{1}{l|}{0.676529791} &
   \multicolumn{1}{l|}{0.676596887} \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{TF\_IDF} &
   \multicolumn{1}{l|}{\textbf{0.745169082}} &
   \multicolumn{1}{l|}{\textbf{0.744967794}} &
   \multicolumn{1}{l|}{\textbf{0.74503489}} \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{KNN}} &
-  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{BOW} &
   \multicolumn{1}{l|}{0.542874396} &
   \multicolumn{1}{l|}{0.498590982} &
   \multicolumn{1}{l|}{0.51335212} \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{TF\_IDF} &
   \multicolumn{1}{l|}{0.330515298} &
   \multicolumn{1}{l|}{0.308172303} &
   \multicolumn{1}{l|}{0.315619968} \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{Random Forest}} &
-  \multicolumn{1}{l|}{Bow} &
+  \multicolumn{1}{l|}{BOW} &
   \multicolumn{1}{l|}{0.65599839} &
   \multicolumn{1}{l|}{0.569041868} &
   \multicolumn{1}{l|}{0.598027375} \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
+  \multicolumn{1}{l|}{TF\_IDF} &
   \multicolumn{1}{l|}{0.736513688} &
   \multicolumn{1}{l|}{0.665458937} &
-  \multicolumn{1}{l|}{0.689143854} \\ \bottomrule
+  \multicolumn{1}{l|}{0.689143854} \\ \midrule
+\multicolumn{1}{|l|}{Bi-LSTM} &
+  \multicolumn{1}{l|}{Ramdom word embeddings} &
+  \multicolumn{1}{l|}{0.452227589} &
+  \multicolumn{1}{l|}{0.409219001} &
+  \multicolumn{1}{l|}{0.422302737} \\ \bottomrule
 \end{tabular}%
 }
-\caption{Sample average scores of baselines}
-\label{tab:Sample average scores}
+
+\caption{Sample average scores of baselines namely, convolutional neural network (\acrshort{cnn}), \acrfull{mnb}, \acrfull{svm}, decision trees, \acrfull{knn}, random forests with pre-trained word embedding model, selected features, term frequency inverse document frequency (\acrshort{tfidf}) and \acrfull{bow} as text features}
+\label{tab:Sample average scores baselines}
 \end{table}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{thesis/figures/Model_wise_prf.png}
+    \caption{Sample average scores of baselines grouped model wise}
+    \label{fig:label_wise_group_baselines}
+\end{figure}
+\pagebreak
+\begin{figure}[]
+    \centering
+    \includegraphics[width=1\textwidth]{thesis/figures/labelwise_wise_prf _baselines.png}
+    \caption{Sample average scores of baselines grouped metric wise}
+    \label{fig:label_wise_group_baselines}
+\end{figure}
+
+Table \ref{tab:Sample average scores baselines} shows the sample average results of the baseline models, which are based on selected text features. Decision tree with \acrfull{tfidf} feature has the highest precision. This is followed by \acrfull{mnb} with \acrfull{bow} feature with a 0.914\% drop of precision. There is a marginal difference of 0.24\% between the precision scores of random forests with \acrfull{tfidf} and \acrfull{mnb} with \acrfull{bow} feature. On average, the precision scores of deep learning models with pre-trained word embeddings has 40.3\% less precision when compared to decision tree with \acrshort{tfidf}. Overall precision scores per model can be seen in the figure \ref{fig:label_wise_group_baselines} where there is a marginal difference in the top three model i.e decision tree with \acrfull{tfidf} , \acrfull{mnb} with  \acrfull{bow}, random forest with \acrfull{tfidf}. Coming to recall, Decision tree with \acrshort{tfidf} has the highest recall followed by  \acrfull{mnb} with \acrfull{bow}. There is a marginal difference of 1.83\% between recall scores of decision tree with \acrshort{tfidf} and \acrfull{mnb} with \acrfull{bow}. Decision tree with \acrfull{bow} has next highest recall to the \acrfull{mnb} with \acrfull{bow}. F1-score of decision tree with \acrshort{tfidf} has the highest score followed by \acrfull{mnb} with \acrfull{bow}. Over all ranking can be inferred from the figure \ref{fig:label_wise_group_baselines}. Where the top three are Decision tree with \acrshort{tfidf}, \acrshort{mnb} with \acrshort{bow} and random forests with \acrshort{tfidf}. Among the deep learning model \acrshort{cnn} with flair word embedding has the highest f1-score followed by \acrfull{lstm} with randomly initialized word embeddings. \acrfull{svm} with selected features has 5.8\% higher f1-score when compared to best performing model among deep learning models (\acrshort{cnn} with flair word embedding). \acrshort{knn} with \acrshort{tfidf} is the worst performing model among others.
+% \pagebreak
 
 \begin{table}[h!]
 \resizebox{\textwidth}{!}{%
@@ -131,369 +177,84 @@ Model\_name &
   Text features &
   hamming\_loss &
   subset\_accuracy &
-  hamming\_score &
-  AUC\_ROC\_score \\ \midrule
+  hamming\_score  \\ \midrule
 \multicolumn{1}{|l|}{\multirow{3}{*}{CNN}} &
   \multicolumn{1}{l|}{Flair word embedding} &
   \multicolumn{1}{l|}{0.25368069933287324} &
   \multicolumn{1}{l|}{0.3333333333333333} &
-  \multicolumn{1}{l|}{0.4270330112721436} &
-  \multicolumn{1}{l|}{0.7011929221217658} \\ \cmidrule(l){2-6} 
+  \multicolumn{1}{l|}{0.4270330112721436} \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
   \multicolumn{1}{l|}{Glove word embedding} &
   \multicolumn{1}{l|}{0.27639751552795033} &
   \multicolumn{1}{l|}{0.28140096618357485} &
-  \multicolumn{1}{l|}{0.3626207729468618} &
-  \multicolumn{1}{l|}{0.6437790877549151} \\ \cmidrule(l){2-6} 
+  \multicolumn{1}{l|}{0.3626207729468618} \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
   \multicolumn{1}{l|}{Fasttext word embedding} &
   \multicolumn{1}{l|}{0.29054520358868186} &
   \multicolumn{1}{l|}{0.26811594202898553} &
-  \multicolumn{1}{l|}{0.35874261943102803} &
-  \multicolumn{1}{l|}{0.6219138829221451} \\ \midrule
+  \multicolumn{1}{l|}{0.35874261943102803}  \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{MNB}} &
   \multicolumn{1}{l|}{Bow} &
   \multicolumn{1}{l|}{\textbf{0.13526570048309178}} &
   \multicolumn{1}{l|}{0.45450885668276975} &
-  \multicolumn{1}{l|}{0.648364772640133} &
-  \multicolumn{1}{l|}{0.8208915654153975} \\ \cmidrule(l){2-6} 
+  \multicolumn{1}{l|}{0.648364772640133}  \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
   \multicolumn{1}{l|}{Tf-idf} &
   \multicolumn{1}{l|}{0.15407177363699104} &
   \multicolumn{1}{l|}{0.32286634460547503} &
-  \multicolumn{1}{l|}{0.4786298980139564} &
-  \multicolumn{1}{l|}{0.7008640200213978} \\ \midrule
+  \multicolumn{1}{l|}{0.4786298980139564} \\ \midrule
 \multicolumn{1}{|l|}{SVM} &
   \multicolumn{1}{l|}{Selected features} &
   \multicolumn{1}{l|}{0.17506326201978376} &
   \multicolumn{1}{l|}{0.2741545893719807} &
-  \multicolumn{1}{l|}{0.4379696725711228} &
-  \multicolumn{1}{l|}{0.692698582788536} \\ \midrule
+  \multicolumn{1}{l|}{0.4379696725711228}  \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{Decision tree}} &
   \multicolumn{1}{l|}{Bow} &
   \multicolumn{1}{l|}{0.17540832758224062} &
   \multicolumn{1}{l|}{0.4887278582930757} &
-  \multicolumn{1}{l|}{0.6139962426194246} &
-  \multicolumn{1}{l|}{0.7674628564064679} \\ \cmidrule(l){2-6} 
+  \multicolumn{1}{l|}{0.6139962426194246}  \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
   \multicolumn{1}{l|}{Tf-idf} &
   \multicolumn{1}{l|}{0.13791120312859442} &
   \multicolumn{1}{l|}{\textbf{0.5837359098228664}} &
-  \multicolumn{1}{l|}{\textbf{0.6912909286097624}} &
-  \multicolumn{1}{l|}{\textbf{0.8211309657175957}} \\ \midrule
+  \multicolumn{1}{l|}{\textbf{0.6912909286097624}} \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{KNN}} &
   \multicolumn{1}{l|}{Bow} &
   \multicolumn{1}{l|}{0.20864964343225212} &
   \multicolumn{1}{l|}{0.35829307568438} &
-  \multicolumn{1}{l|}{0.46658615136876125} &
-  \multicolumn{1}{l|}{0.6732183869305738} \\ \cmidrule(l){2-6} 
+  \multicolumn{1}{l|}{0.46658615136876125}  \\ \cmidrule(l){2-5} 
 \multicolumn{1}{|l|}{} &
   \multicolumn{1}{l|}{Tf-idf} &
   \multicolumn{1}{l|}{0.25718886588451806} &
   \multicolumn{1}{l|}{0.2608695652173913} &
-  \multicolumn{1}{l|}{0.29985238862050506} &
-  \multicolumn{1}{l|}{0.5795307836306697} \\ \midrule
+  \multicolumn{1}{l|}{0.29985238862050506}  \\ \midrule
 \multicolumn{1}{|l|}{\multirow{2}{*}{Random Forest}} &
   \multicolumn{1}{l|}{Bow} &
   \multicolumn{1}{l|}{0.1642512077294686} &
   \multicolumn{1}{l|}{0.36594202898550726} &
-  \multicolumn{1}{l|}{0.5303274288781523} &
-  \multicolumn{1}{l|}{0.7328031095030783} \\ \cmidrule(l){2-6}
+  \multicolumn{1}{l|}{0.5303274288781523} & \\ \cmidrule(l){2-5}
 \multicolumn{1}{|l|}{} &
   \multicolumn{1}{l|}{Tf-idf} &
   \multicolumn{1}{l|}{0.1376236484932137} &
   \multicolumn{1}{l|}{0.47987117552334946} &
-  \multicolumn{1}{l|}{0.6272812667740167} &
-  \multicolumn{1}{l|}{0.7910640875745566} \\ \bottomrule
+  \multicolumn{1}{l|}{0.6272812667740167} & \\ \midrule
+\multicolumn{1}{|l|}{Bi-LSTM} &
+  \multicolumn{1}{l|}{Ramdom word embeddings} &
+  \multicolumn{1}{l|}{0.25960432482171614} &
+  \multicolumn{1}{l|}{0.2713365539452496} &
+  \multicolumn{1}{l|}{0.3784219001610322} \\ \bottomrule
 \end{tabular}%
 }
-\caption{Hamming loss, hamming score, subset accuracy, AUC\_ROC scores of baselines}
+\caption{Hamming loss, hamming score, subset accuracy scores of baselines, namely, \acrfull{cnn}, \acrfull{mnb}, \acrfull{svm}, decision trees, \acrfull{knn}, random forests with pre-trained word embedding model, selected features, \acrfull{tfidf} and \acrfull{bow} as text features}
 \label{tab:sample_based_baseline}
 \end{table}
 
-% \pagebreak
-% \section {Assessment using Label based metrics}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{thesis/figures/HHAA_final.png}
+    \caption{Hamming loss, hamming score, subset accuracy scores of language models grouped label wise}
+    \label{fig:label_wise_group_baselines}
+\end{figure}
 
-% \subsection{Language models}
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \subsubsection{Micro average results}
-
-\begin{table}[h!]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}lllll@{}}
-\toprule
-Model name & \multicolumn{4}{c}{Micro average} \\ \midrule
-\multicolumn{1}{l|}{} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{support} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{bert-base-uncased} &
-  \multicolumn{1}{l|}{0.8473019517795637} &
-  \multicolumn{1}{l|}{0.8518005540166205} &
-  \multicolumn{1}{l|}{0.8495452975710832} &
-  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{roberta-base} &
-  \multicolumn{1}{l|}{0.8923041368153455} &
-  \multicolumn{1}{l|}{\textbf{0.8912742382271468}} &
-  \multicolumn{1}{l|}{\textbf{0.8917888901720753}} &
-  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{gpt2} &
-  \multicolumn{1}{l|}{0.8778100072516316} &
-  \multicolumn{1}{l|}{0.5588642659279779} &
-  \multicolumn{1}{l|}{0.6829337094499295} &
-  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{xlnet-base-cased} &
-  \multicolumn{1}{l|}{\textbf{0.9133793103448276}} &
-  \multicolumn{1}{l|}{0.7643120960295475} &
-  \multicolumn{1}{l|}{0.8322231996983788} &
-  \multicolumn{1}{l|}{4332} \\ \bottomrule
-\end{tabular}
-}
-\caption{Micro average precision, recall and f1 scores}
-\label{tab:my-table}
-\end{table}
-% \subsubsection{Macro average results}
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-\begin{table}[h!]
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}lllll@{}}
-\toprule
-Model name &
-  \multicolumn{4}{c}{Macro average} \\ \midrule
-\multicolumn{1}{l|}{} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{support} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{bert-base-uncased} &
-  \multicolumn{1}{l|}{0.8783981314327647} &
-  \multicolumn{1}{l|}{0.8712580721656895} &
-  \multicolumn{1}{l|}{0.8739276911310043} &
-  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{roberta-base} &
-  \multicolumn{1}{l|}{0.9091118957769646} &
-  \multicolumn{1}{l|}{\textbf{0.9070609818525238}} &
-  \multicolumn{1}{l|}{\textbf{ 0.9075084865461823}} &
-  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{gpt2} &
-  \multicolumn{1}{l|}{0.8515018016212029} &
-  \multicolumn{1}{l|}{0.6114231840818027} &
-  \multicolumn{1}{l|}{0.6828126561227609} &
-  \multicolumn{1}{l|}{4332} \\ \cmidrule(l){2-5} 
-\multicolumn{1}{l|}{xlnet-base-cased} &
-  \multicolumn{1}{l|}{\textbf{0.9132213310057649}} &
-  \multicolumn{1}{l|}{0.8046776860357208} &
-  \multicolumn{1}{l|}{0.8466299043854991} &
-  \multicolumn{1}{l|}{4332} \\ \bottomrule
-\end{tabular}
-}
-\caption{Macro average precision, recall and f1 scores
- }
-\label{tab:Macro_avg_LM}
-\end{table}
-
-% \subsection{Baselines}
-
-% \subsubsection{Micro average results}
-\begin{table}[h!]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}clllll@{}}
-\toprule
-\multicolumn{1}{l}{Model name} &
-  Text features &
-  \multicolumn{4}{c}{Micro average} \\ \midrule
-\multicolumn{2}{l}{} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{support} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{3}{*}{CNN}} &
-  \multicolumn{1}{l|}{Flair word embedding} &
-  \multicolumn{1}{l|}{0.48973225890304134} &
-  \multicolumn{1}{l|}{0.43490304709141275} &
-  \multicolumn{1}{l|}{0.46069201613889227} &
-  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Glove word embedding} &
-  \multicolumn{1}{l|}{0.43255549231644846} &
-  \multicolumn{1}{l|}{0.3508771929824561} &
-  \multicolumn{1}{l|}{0.38745857761916896} &
-  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Fasttext word embedding} &
-  \multicolumn{1}{l|}{0.41004497751124436} &
-  \multicolumn{1}{l|}{0.37880886426592797} &
-  \multicolumn{1}{l|}{0.3938084953203743} &
-  \multicolumn{1}{l|}{4332.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{MNB}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.7321135350692001} &
-  \multicolumn{1}{l|}{\textbf{0.7206187947356268}} &
-  \multicolumn{1}{l|}{\textbf{0.726320688852688}} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
-  \multicolumn{1}{l|}{\textbf{0.8333333333333334}} &
-  \multicolumn{1}{l|}{0.4767951974139921} &
-  \multicolumn{1}{l|}{0.6065501542076664} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{SVM} &
-  \multicolumn{1}{l|}{Selected features} &
-  \multicolumn{1}{l|}{0.7591623036649214} &
-  \multicolumn{1}{l|}{0.43523435696144075} &
-  \multicolumn{1}{l|}{0.5532726739066627} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{Decision tree}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.6506704304869443} &
-  \multicolumn{1}{l|}{0.6386515816208728} &
-  \multicolumn{1}{l|}{0.6446049871824749} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_df} &
-  \multicolumn{1}{l|}{0.7255542590431738} &
-  \multicolumn{1}{l|}{0.7178480720387901} &
-  \multicolumn{1}{l|}{0.7216805942432682} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{KNN}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.6107086614173228} &
-  \multicolumn{1}{l|}{0.44770260909720616} &
-  \multicolumn{1}{l|}{0.5166533439914734} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
-  \multicolumn{1}{l|}{0.4688466637207247} &
-  \multicolumn{1}{l|}{0.24497806511198336} &
-  \multicolumn{1}{l|}{0.32180770397330904} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{Random Forest}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.742678512668641} &
-  \multicolumn{1}{l|}{0.5211267605633803} &
-  \multicolumn{1}{l|}{0.612483039348711} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_df} &
-  \multicolumn{1}{l|}{0.7766990291262136} &
-  \multicolumn{1}{l|}{0.6280304779496652} &
-  \multicolumn{1}{l|}{0.6944976381973701} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|l|}{Bi-LSTM} &
-  \multicolumn{1}{l|}{Random word ebmedding} &
-  \multicolumn{1}{l|}{0.4737903225806452} &
-  \multicolumn{1}{l|}{0.3797322253000923} &
-  \multicolumn{1}{l|}{0.4215786776012301} &
-  \multicolumn{1}{l|}{4332.0} \\ \bottomrule
-\end{tabular}%
-}
-\caption{Micro average scores}
-\label{tab:Micro-average}
-\end{table}
-
-% \subsubsection{Macro average results}
-% Please add the following required packages to your document preamble:
-% \usepackage{booktabs}
-% \usepackage{multirow}
-% \usepackage{graphicx}
-\begin{table}[h!]
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}clllll@{}}
-\toprule
-\multicolumn{1}{l}{Model Name} &
-  Text features &
-  \multicolumn{4}{c}{Macro average} \\ \midrule
-\multicolumn{1}{l}{} &
-  \multicolumn{1}{l|}{} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{support} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{3}{*}{CNN}} &
-  \multicolumn{1}{l|}{Flair word embeddings} &
-  \multicolumn{1}{l|}{0.4707581959482754} &
-  \multicolumn{1}{l|}{0.440353359802024} &
-  \multicolumn{1}{l|}{0.4453560677568051} &
-  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Glove word embedding} &
-  \multicolumn{1}{l|}{0.37714507704597927} &
-  \multicolumn{1}{l|}{0.3332984618378458} &
-  \multicolumn{1}{l|}{0.333853650644168} &
-  \multicolumn{1}{l|}{4332.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Fasttext word embedding} &
-  \multicolumn{1}{l|}{0.3953778279026942} &
-  \multicolumn{1}{l|}{0.36789901294047217} &
-  \multicolumn{1}{l|}{0.36598027314421216} &
-  \multicolumn{1}{l|}{4332.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{MNB}} &
-  \multicolumn{1}{l|}{Bag of word} &
-  \multicolumn{1}{l|}{0.759323788076668} &
-  \multicolumn{1}{l|}{0.7387751356613154} &
-  \multicolumn{1}{l|}{0.7465872781807842} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
-  \multicolumn{1}{l|}{\textbf{0.8589890196001617}} &
-  \multicolumn{1}{l|}{0.4396922334334639} &
-  \multicolumn{1}{l|}{0.5542120343015503} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{SVM} &
-  \multicolumn{1}{l|}{Selected features} &
-  \multicolumn{1}{l|}{0.6703081342283921} &
-  \multicolumn{1}{l|}{0.43642679356309977} &
-  \multicolumn{1}{l|}{0.5079788761483882} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{Decision tree}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.6863092356531861} &
-  \multicolumn{1}{l|}{0.6631057239385393} &
-  \multicolumn{1}{l|}{0.6728741288912851} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
-  \multicolumn{1}{l|}{0.7570596244075884} &
-  \multicolumn{1}{l|}{\textbf{0.7437090235822891}} &
-  \multicolumn{1}{l|}{\textbf{0.7496326187263594}} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{\multirow{2}{*}{KNN}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.6799534225646005} &
-  \multicolumn{1}{l|}{0.45184631377295326} &
-  \multicolumn{1}{l|}{0.5133651862257996} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|c|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
-  \multicolumn{1}{l|}{0.67397875838546} &
-  \multicolumn{1}{l|}{0.25389793267234245} &
-  \multicolumn{1}{l|}{0.3015757205070135} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|l|}{\multirow{2}{*}{Random Forest}} &
-  \multicolumn{1}{l|}{Bow} &
-  \multicolumn{1}{l|}{0.7975496926998226} &
-  \multicolumn{1}{l|}{0.5371770219486752} &
-  \multicolumn{1}{l|}{0.6331819893966618} &
-  \multicolumn{1}{l|}{4331.0} \\ \cmidrule(l){2-6} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{Tf\_idf} &
-  \multicolumn{1}{l|}{0.8132845806835837} &
-  \multicolumn{1}{l|}{0.6525195234180539} &
-  \multicolumn{1}{l|}{0.7167577950481748} &
-  \multicolumn{1}{l|}{4331.0} \\ \midrule
-\multicolumn{1}{|c|}{Bi-LSTM} &
-  \multicolumn{1}{l|}{Random word embedding} &
-  \multicolumn{1}{l|}{0.42381624795652967} &
-  \multicolumn{1}{l|}{0.3426061177159399} &
-  \multicolumn{1}{l|}{0.3621467884567406} &
-  \multicolumn{1}{l|}{4332.0} \\ \bottomrule
-\end{tabular}%
-}
-\caption{Macro average scores of baselines}
-\label{tab:Macro-avg-baselines}
-\end{table}
+Table \ref{tab:sample_based_baseline} shows the hamming loss and accuracy and also subset accuracy. \acrfull{mnb} with \acrshort{bow} has the lowest hamming loss. This is followed by random forests with \acrshort{tfidf} and decision tree with \acrshort{tfidf}. Decision tree with \acrshort{tfidf} has 0.2\% higher loss when compared to random forests with \acrshort{tfidf}. Overall results among different models can be found in \ref{fig:label_wise_group_baselines}. The top three models hamming loss tend to have negligible difference. Decision tree with \acrshort{tfidf} features has the highest subset accuracy, followed by decision tree with \acrshort{bow} features, with a difference of 16.27\%. Random forest with \acrshort{tfidf} has the next highest subset accuracy. \acrshort{cnn} with flair embedding has the highest subset accuracy among deep learning models. \acrshort{svm} with selected features and \acrshort{lstm} with random word embedding have negligible difference in their scores (SVM 1.02\% higher).  Coming to hamming score or accuracy with partial matches, decision tree with \acrshort{tfidf} features has the highest hamming score has the highest score with 15.55\% rise in value when considering partial matches rather than exact match (subset accuracy). \acrshort{mnb} with \acrshort{bow} features has the next best score, followed by 
+\pagebreak

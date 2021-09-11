@@ -6,7 +6,7 @@
 
 % set up some resources (graphics and bibliography)
 \graphicspath{{figures/}}
-
+\makeglossaries
 
 %%%%%%%%%
 % your thesis title, name, advisor, etc. go here;
@@ -43,6 +43,8 @@ Maximilian Spliethöver}
 %%%%%%%%%
 % the contents of your thesis go into file body.tex
 %%%%%%%%%
+% \makeglossaries
+\printglossary[type=\acronymtype]
 \input{body}
 
 % include the bibliography, and add it as a chapter the table of contents
@@ -55,8 +57,7 @@ Maximilian Spliethöver}
 
 % \newpage
 % Generate the glossary
-% \makeglossaries
-% \printglossary[type=\acronymtype]
+
 %%%%%%%%%
 % the appendices of your thesis go into file appendix.tex
 %%%%%%%%%
