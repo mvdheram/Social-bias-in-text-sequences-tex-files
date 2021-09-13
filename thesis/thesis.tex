@@ -32,8 +32,12 @@ Maximilian Spliethöver}
 % start with the titlepage, the formalities, and then the abstract
 \input{pretext/titlepage} % prints the title page
 \input{pretext/erklaerung}
-% \cleardoublepage
+
+\cleardoublepage
 \vspace*{\fill}
+\begin{abstract}
+	\input{thesis/pretext/abstract}
+\end{abstract}
 \acresetall
 \vspace*{\fill}
 
@@ -44,7 +48,7 @@ Maximilian Spliethöver}
 % the contents of your thesis go into file body.tex
 %%%%%%%%%
 % \makeglossaries
-\printglossary[type=\acronymtype]
+% \printglossary[type=\acronymtype]
 \input{body}
 
 % include the bibliography, and add it as a chapter the table of contents

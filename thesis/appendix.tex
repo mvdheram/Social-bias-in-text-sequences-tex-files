@@ -244,171 +244,171 @@ Model name & \multicolumn{4}{c}{Micro average} \\ \midrule
 % \usepackage{graphicx}
 % \usepackage{lscape}
 \pagebreak
-\begin{landscape}
-\begin{table}[]
-\subsection{Label-wise results}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{@{}lllllllll@{}}
-\toprule
-Model\_name &
-  Metrics &
-  Ethnicity &
-  Gender &
-  Profession &
-  Religion &
-  Anti-stereotype &
-  Stereotype &
-  Unrelated \\ \midrule
-\multicolumn{1}{|l|}{\multirow{4}{*}{bert\_base\_uncased}} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{0.9773299748110831} &
-  \multicolumn{1}{l|}{0.8960573476702509} &
-  \multicolumn{1}{l|}{0.9004149377593361} &
-  \multicolumn{1}{l|}{0.9897610921501706} &
-  \multicolumn{1}{l|}{0.6714490674318508} &
-  \multicolumn{1}{l|}{0.7202680067001676} &
-  \multicolumn{1}{l|}{0.9935064935064936} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{0.9897959183673469} &
-  \multicolumn{1}{l|}{0.8223684210526315} &
-  \multicolumn{1}{l|}{0.9293361884368309} &
-  \multicolumn{1}{l|}{0.9897610921501706} &
-  \multicolumn{1}{l|}{0.6015424164524421} &
-  \multicolumn{1}{l|}{0.8037383177570093} &
-  \multicolumn{1}{l|}{0.9622641509433962} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{0.9835234474017743} &
-  \multicolumn{1}{l|}{0.8576329331046311} &
-  \multicolumn{1}{l|}{0.9146469968387777} &
-  \multicolumn{1}{l|}{0.9897610921501706} &
-  \multicolumn{1}{l|}{0.6345762711864408} &
-  \multicolumn{1}{l|}{0.7597173144876326} &
-  \multicolumn{1}{l|}{0.9776357827476039} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{support} &
-  \multicolumn{1}{l|}{784.0} &
-  \multicolumn{1}{l|}{304.0} &
-  \multicolumn{1}{l|}{467.0} &
-  \multicolumn{1}{l|}{293.0} &
-  \multicolumn{1}{l|}{778.0} &
-  \multicolumn{1}{l|}{1070.0} &
-  \multicolumn{1}{l|}{636.0} \\ \midrule
-\multicolumn{1}{|l|}{\multirow{4}{*}{roberta-base}} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{0.9834394904458599} &
-  \multicolumn{1}{l|}{0.8778135048231511} &
-  \multicolumn{1}{l|}{0.9261603375527426} &
-  \multicolumn{1}{l|}{0.9931740614334471} &
-  \multicolumn{1}{l|}{0.7858176555716353} &
-  \multicolumn{1}{l|}{0.8038194444444444} &
-  \multicolumn{1}{l|}{0.9935587761674718} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{0.9846938775510204} &
-  \multicolumn{1}{l|}{0.8980263157894737} &
-  \multicolumn{1}{l|}{0.9400428265524625} &
-  \multicolumn{1}{l|}{0.9931740614334471} &
-  \multicolumn{1}{l|}{0.6979434447300771} &
-  \multicolumn{1}{l|}{0.8654205607476636} &
-  \multicolumn{1}{l|}{0.970125786163522} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{0.9840662842574888} &
-  \multicolumn{1}{l|}{0.8878048780487804} &
-  \multicolumn{1}{l|}{0.9330499468650373} &
-  \multicolumn{1}{l|}{0.9931740614334471} &
-  \multicolumn{1}{l|}{0.7392784206943499} &
-  \multicolumn{1}{l|}{0.8334833483348336} &
-  \multicolumn{1}{l|}{0.9817024661893397} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{support} &
-  \multicolumn{1}{l|}{784.0} &
-  \multicolumn{1}{l|}{304.0} &
-  \multicolumn{1}{l|}{467.0} &
-  \multicolumn{1}{l|}{293.0} &
-  \multicolumn{1}{l|}{778.0} &
-  \multicolumn{1}{l|}{1070.0} &
-  \multicolumn{1}{l|}{636.0} \\ \midrule
-\multicolumn{1}{|l|}{\multirow{4}{*}{xlnet-base-cased}} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{0.96625} &
-  \multicolumn{1}{l|}{0.8951310861423221} &
-  \multicolumn{1}{l|}{0.9014989293361885} &
-  \multicolumn{1}{l|}{0.993103448275862} &
-  \multicolumn{1}{l|}{0.8062015503875969} &
-  \multicolumn{1}{l|}{0.8386699507389163} &
-  \multicolumn{1}{l|}{0.9916943521594684} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{0.985969387755102} &
-  \multicolumn{1}{l|}{0.7861842105263158} &
-  \multicolumn{1}{l|}{0.9014989293361885} &
-  \multicolumn{1}{l|}{0.9829351535836177} &
-  \multicolumn{1}{l|}{0.40102827763496146} &
-  \multicolumn{1}{l|}{0.6364485981308411} &
-  \multicolumn{1}{l|}{0.9386792452830188} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{0.9760101010101009} &
-  \multicolumn{1}{l|}{0.8371278458844135} &
-  \multicolumn{1}{l|}{0.9014989293361885} &
-  \multicolumn{1}{l|}{0.9879931389365352} &
-  \multicolumn{1}{l|}{0.5356223175965665} &
-  \multicolumn{1}{l|}{0.7236981934112645} &
-  \multicolumn{1}{l|}{0.9644588045234248} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{support} &
-  \multicolumn{1}{l|}{784.0} &
-  \multicolumn{1}{l|}{304.0} &
-  \multicolumn{1}{l|}{467.0} &
-  \multicolumn{1}{l|}{293.0} &
-  \multicolumn{1}{l|}{778.0} &
-  \multicolumn{1}{l|}{1070.0} &
-  \multicolumn{1}{l|}{636.0} \\ \midrule
-\multicolumn{1}{|l|}{\multirow{4}{*}{gpt2}} &
-  \multicolumn{1}{l|}{precision} &
-  \multicolumn{1}{l|}{0.9219178082191781} &
-  \multicolumn{1}{l|}{0.8918918918918919} &
-  \multicolumn{1}{l|}{0.8039647577092511} &
-  \multicolumn{1}{l|}{0.9745454545454545} &
-  \multicolumn{1}{l|}{0.5833333333333334} &
-  \multicolumn{1}{l|}{0.8333333333333334} &
-  \multicolumn{1}{l|}{0.9515260323159784} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{recall} &
-  \multicolumn{1}{l|}{0.8584183673469388} &
-  \multicolumn{1}{l|}{0.4342105263157895} &
-  \multicolumn{1}{l|}{0.7815845824411135} &
-  \multicolumn{1}{l|}{0.9146757679180887} &
-  \multicolumn{1}{l|}{0.12596401028277635} &
-  \multicolumn{1}{l|}{0.3317757009345794} &
-  \multicolumn{1}{l|}{0.8333333333333334} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{f1-score} &
-  \multicolumn{1}{l|}{0.8890356671070013} &
-  \multicolumn{1}{l|}{0.5840707964601769} &
-  \multicolumn{1}{l|}{0.7926167209554832} &
-  \multicolumn{1}{l|}{0.9436619718309859} &
-  \multicolumn{1}{l|}{0.20718816067653276} &
-  \multicolumn{1}{l|}{0.4745989304812835} &
-  \multicolumn{1}{l|}{0.8885163453478626} \\ \cmidrule(l){2-9} 
-\multicolumn{1}{|l|}{} &
-  \multicolumn{1}{l|}{support} &
-  \multicolumn{1}{l|}{784.0} &
-  \multicolumn{1}{l|}{304.0} &
-  \multicolumn{1}{l|}{467.0} &
-  \multicolumn{1}{l|}{293.0} &
-  \multicolumn{1}{l|}{778.0} &
-  \multicolumn{1}{l|}{1070.0} &
-  \multicolumn{1}{l|}{636.0} \\ \bottomrule
-\end{tabular}%
-}
-\caption{Label wise precision, recall, f1score and support measures}
-\label{tab:Per-Label-precision-recall-f-measure}
-\end{table}
-\end{landscape}
+% \begin{landscape}
+% \begin{table}[]
+% \subsection{Label-wise results}
+% \resizebox{\columnwidth}{!}{%
+% \begin{tabular}{@{}lllllllll@{}}
+% \toprule
+% Model\_name &
+%   Metrics &
+%   Ethnicity &
+%   Gender &
+%   Profession &
+%   Religion &
+%   Anti-stereotype &
+%   Stereotype &
+%   Unrelated \\ \midrule
+% \multicolumn{1}{|l|}{\multirow{4}{*}{bert\_base\_uncased}} &
+%   \multicolumn{1}{l|}{precision} &
+%   \multicolumn{1}{l|}{0.9773299748110831} &
+%   \multicolumn{1}{l|}{0.8960573476702509} &
+%   \multicolumn{1}{l|}{0.9004149377593361} &
+%   \multicolumn{1}{l|}{0.9897610921501706} &
+%   \multicolumn{1}{l|}{0.6714490674318508} &
+%   \multicolumn{1}{l|}{0.7202680067001676} &
+%   \multicolumn{1}{l|}{0.9935064935064936} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{recall} &
+%   \multicolumn{1}{l|}{0.9897959183673469} &
+%   \multicolumn{1}{l|}{0.8223684210526315} &
+%   \multicolumn{1}{l|}{0.9293361884368309} &
+%   \multicolumn{1}{l|}{0.9897610921501706} &
+%   \multicolumn{1}{l|}{0.6015424164524421} &
+%   \multicolumn{1}{l|}{0.8037383177570093} &
+%   \multicolumn{1}{l|}{0.9622641509433962} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{f1-score} &
+%   \multicolumn{1}{l|}{0.9835234474017743} &
+%   \multicolumn{1}{l|}{0.8576329331046311} &
+%   \multicolumn{1}{l|}{0.9146469968387777} &
+%   \multicolumn{1}{l|}{0.9897610921501706} &
+%   \multicolumn{1}{l|}{0.6345762711864408} &
+%   \multicolumn{1}{l|}{0.7597173144876326} &
+%   \multicolumn{1}{l|}{0.9776357827476039} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{support} &
+%   \multicolumn{1}{l|}{784.0} &
+%   \multicolumn{1}{l|}{304.0} &
+%   \multicolumn{1}{l|}{467.0} &
+%   \multicolumn{1}{l|}{293.0} &
+%   \multicolumn{1}{l|}{778.0} &
+%   \multicolumn{1}{l|}{1070.0} &
+%   \multicolumn{1}{l|}{636.0} \\ \midrule
+% \multicolumn{1}{|l|}{\multirow{4}{*}{roberta-base}} &
+%   \multicolumn{1}{l|}{precision} &
+%   \multicolumn{1}{l|}{0.9834394904458599} &
+%   \multicolumn{1}{l|}{0.8778135048231511} &
+%   \multicolumn{1}{l|}{0.9261603375527426} &
+%   \multicolumn{1}{l|}{0.9931740614334471} &
+%   \multicolumn{1}{l|}{0.7858176555716353} &
+%   \multicolumn{1}{l|}{0.8038194444444444} &
+%   \multicolumn{1}{l|}{0.9935587761674718} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{recall} &
+%   \multicolumn{1}{l|}{0.9846938775510204} &
+%   \multicolumn{1}{l|}{0.8980263157894737} &
+%   \multicolumn{1}{l|}{0.9400428265524625} &
+%   \multicolumn{1}{l|}{0.9931740614334471} &
+%   \multicolumn{1}{l|}{0.6979434447300771} &
+%   \multicolumn{1}{l|}{0.8654205607476636} &
+%   \multicolumn{1}{l|}{0.970125786163522} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{f1-score} &
+%   \multicolumn{1}{l|}{0.9840662842574888} &
+%   \multicolumn{1}{l|}{0.8878048780487804} &
+%   \multicolumn{1}{l|}{0.9330499468650373} &
+%   \multicolumn{1}{l|}{0.9931740614334471} &
+%   \multicolumn{1}{l|}{0.7392784206943499} &
+%   \multicolumn{1}{l|}{0.8334833483348336} &
+%   \multicolumn{1}{l|}{0.9817024661893397} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{support} &
+%   \multicolumn{1}{l|}{784.0} &
+%   \multicolumn{1}{l|}{304.0} &
+%   \multicolumn{1}{l|}{467.0} &
+%   \multicolumn{1}{l|}{293.0} &
+%   \multicolumn{1}{l|}{778.0} &
+%   \multicolumn{1}{l|}{1070.0} &
+%   \multicolumn{1}{l|}{636.0} \\ \midrule
+% \multicolumn{1}{|l|}{\multirow{4}{*}{xlnet-base-cased}} &
+%   \multicolumn{1}{l|}{precision} &
+%   \multicolumn{1}{l|}{0.96625} &
+%   \multicolumn{1}{l|}{0.8951310861423221} &
+%   \multicolumn{1}{l|}{0.9014989293361885} &
+%   \multicolumn{1}{l|}{0.993103448275862} &
+%   \multicolumn{1}{l|}{0.8062015503875969} &
+%   \multicolumn{1}{l|}{0.8386699507389163} &
+%   \multicolumn{1}{l|}{0.9916943521594684} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{recall} &
+%   \multicolumn{1}{l|}{0.985969387755102} &
+%   \multicolumn{1}{l|}{0.7861842105263158} &
+%   \multicolumn{1}{l|}{0.9014989293361885} &
+%   \multicolumn{1}{l|}{0.9829351535836177} &
+%   \multicolumn{1}{l|}{0.40102827763496146} &
+%   \multicolumn{1}{l|}{0.6364485981308411} &
+%   \multicolumn{1}{l|}{0.9386792452830188} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{f1-score} &
+%   \multicolumn{1}{l|}{0.9760101010101009} &
+%   \multicolumn{1}{l|}{0.8371278458844135} &
+%   \multicolumn{1}{l|}{0.9014989293361885} &
+%   \multicolumn{1}{l|}{0.9879931389365352} &
+%   \multicolumn{1}{l|}{0.5356223175965665} &
+%   \multicolumn{1}{l|}{0.7236981934112645} &
+%   \multicolumn{1}{l|}{0.9644588045234248} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{support} &
+%   \multicolumn{1}{l|}{784.0} &
+%   \multicolumn{1}{l|}{304.0} &
+%   \multicolumn{1}{l|}{467.0} &
+%   \multicolumn{1}{l|}{293.0} &
+%   \multicolumn{1}{l|}{778.0} &
+%   \multicolumn{1}{l|}{1070.0} &
+%   \multicolumn{1}{l|}{636.0} \\ \midrule
+% \multicolumn{1}{|l|}{\multirow{4}{*}{gpt2}} &
+%   \multicolumn{1}{l|}{precision} &
+%   \multicolumn{1}{l|}{0.9219178082191781} &
+%   \multicolumn{1}{l|}{0.8918918918918919} &
+%   \multicolumn{1}{l|}{0.8039647577092511} &
+%   \multicolumn{1}{l|}{0.9745454545454545} &
+%   \multicolumn{1}{l|}{0.5833333333333334} &
+%   \multicolumn{1}{l|}{0.8333333333333334} &
+%   \multicolumn{1}{l|}{0.9515260323159784} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{recall} &
+%   \multicolumn{1}{l|}{0.8584183673469388} &
+%   \multicolumn{1}{l|}{0.4342105263157895} &
+%   \multicolumn{1}{l|}{0.7815845824411135} &
+%   \multicolumn{1}{l|}{0.9146757679180887} &
+%   \multicolumn{1}{l|}{0.12596401028277635} &
+%   \multicolumn{1}{l|}{0.3317757009345794} &
+%   \multicolumn{1}{l|}{0.8333333333333334} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{f1-score} &
+%   \multicolumn{1}{l|}{0.8890356671070013} &
+%   \multicolumn{1}{l|}{0.5840707964601769} &
+%   \multicolumn{1}{l|}{0.7926167209554832} &
+%   \multicolumn{1}{l|}{0.9436619718309859} &
+%   \multicolumn{1}{l|}{0.20718816067653276} &
+%   \multicolumn{1}{l|}{0.4745989304812835} &
+%   \multicolumn{1}{l|}{0.8885163453478626} \\ \cmidrule(l){2-9} 
+% \multicolumn{1}{|l|}{} &
+%   \multicolumn{1}{l|}{support} &
+%   \multicolumn{1}{l|}{784.0} &
+%   \multicolumn{1}{l|}{304.0} &
+%   \multicolumn{1}{l|}{467.0} &
+%   \multicolumn{1}{l|}{293.0} &
+%   \multicolumn{1}{l|}{778.0} &
+%   \multicolumn{1}{l|}{1070.0} &
+%   \multicolumn{1}{l|}{636.0} \\ \bottomrule
+% \end{tabular}%
+% }
+% \caption{Label wise precision, recall, f1score and support measures}
+% \label{tab:Per-Label-precision-recall-f-measure}
+% \end{table}
+% \end{landscape}
 
 \section{Baseline reports}
 \begin{table}[h!]
@@ -1029,9 +1029,104 @@ Model\_name &
 \label{tab:Label-wise-SVM}
 \end{table}
 
-\pagebreak
 
-\subsubsection{Label-wise Random forest}
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}cllllllll@{}}
+\toprule
+Model\_name &
+  Metrics &
+  Ethnicity &
+  gender &
+  profession &
+  religion &
+  Anti-stereotype &
+  stereotype &
+  unrelated \\ \midrule
+\multicolumn{1}{|c|}{\multirow{4}{*}{Decision\_tree\_bow}} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{0.7930607187112764} &
+  \multicolumn{1}{l|}{0.7083333333333334} &
+  \multicolumn{1}{l|}{0.7555555555555555} &
+  \multicolumn{1}{l|}{0.8340080971659919} &
+  \multicolumn{1}{l|}{0.35705045278137126} &
+  \multicolumn{1}{l|}{0.5251509054325956} &
+  \multicolumn{1}{l|}{0.8310055865921788} \\ \cmidrule(l){2-9} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{0.8163265306122449} &
+  \multicolumn{1}{l|}{0.6171617161716172} &
+  \multicolumn{1}{l|}{0.728051391862955} &
+  \multicolumn{1}{l|}{0.7030716723549488} &
+  \multicolumn{1}{l|}{0.3552123552123552} &
+  \multicolumn{1}{l|}{0.48785046728971965} &
+  \multicolumn{1}{l|}{0.9340659340659341} \\ \cmidrule(l){2-9} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{f1-score} &
+  \multicolumn{1}{l|}{0.8045254556882464} &
+  \multicolumn{1}{l|}{0.6596119929453264} &
+  \multicolumn{1}{l|}{0.7415485278080697} &
+  \multicolumn{1}{l|}{0.7629629629629631} &
+  \multicolumn{1}{l|}{0.3561290322580645} &
+  \multicolumn{1}{l|}{0.5058139534883721} &
+  \multicolumn{1}{l|}{0.8795269770879528} \\ \cmidrule(l){2-9} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{support} &
+  \multicolumn{1}{l|}{784.0} &
+  \multicolumn{1}{l|}{303.0} &
+  \multicolumn{1}{l|}{467.0} &
+  \multicolumn{1}{l|}{293.0} &
+  \multicolumn{1}{l|}{777.0} &
+  \multicolumn{1}{l|}{1070.0} &
+  \multicolumn{1}{l|}{637.0} \\ \midrule
+\multicolumn{1}{|c|}{\multirow{4}{*}{Decision\_tree\_tf\_idf}} &
+  \multicolumn{1}{l|}{precision} &
+  \multicolumn{1}{l|}{0.8659003831417624} &
+  \multicolumn{1}{l|}{0.7247386759581882} &
+  \multicolumn{1}{l|}{0.823404255319149} &
+  \multicolumn{1}{l|}{0.9163498098859315} &
+  \multicolumn{1}{l|}{0.47724477244772445} &
+  \multicolumn{1}{l|}{0.6224696356275303} &
+  \multicolumn{1}{l|}{0.869309838472834} \\ \cmidrule(l){2-9} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{recall} &
+  \multicolumn{1}{l|}{0.8647959183673469} &
+  \multicolumn{1}{l|}{0.6864686468646864} &
+  \multicolumn{1}{l|}{0.828693790149893} &
+  \multicolumn{1}{l|}{0.8225255972696246} &
+  \multicolumn{1}{l|}{0.49935649935649934} &
+  \multicolumn{1}{l|}{0.5747663551401869} &
+  \multicolumn{1}{l|}{0.9293563579277865} \\ \cmidrule(l){2-9} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{f1-score} &
+  \multicolumn{1}{l|}{0.8653477983407786} &
+  \multicolumn{1}{l|}{0.7050847457627119} &
+  \multicolumn{1}{l|}{0.8260405549626468} &
+  \multicolumn{1}{l|}{0.8669064748201438} &
+  \multicolumn{1}{l|}{0.48805031446540875} &
+  \multicolumn{1}{l|}{0.597667638483965} &
+  \multicolumn{1}{l|}{0.8983308042488619} \\ \cmidrule(l){2-9} 
+\multicolumn{1}{|c|}{} &
+  \multicolumn{1}{l|}{support} &
+  \multicolumn{1}{l|}{784.0} &
+  \multicolumn{1}{l|}{303.0} &
+  \multicolumn{1}{l|}{467.0} &
+  \multicolumn{1}{l|}{293.0} &
+  \multicolumn{1}{l|}{777.0} &
+  \multicolumn{1}{l|}{1070.0} &
+  \multicolumn{1}{l|}{637.0} \\ \bottomrule
+\end{tabular}%
+}
+\caption{Label wise scores of decision trees}
+\label{tab:Label_wise_decision_tree}
+\end{table}
+% \pagebreak
+
+% \subsubsection{Label-wise Random forest}
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
 % \usepackage{multirow}
@@ -1136,7 +1231,7 @@ Model\_name &
 \label{tab:Label-wise-random-forest}
 \end{table}
 
-\subsubsection{Label-wise Bi-LSTM with random word embeddings}
+% \subsubsection{Label-wise Bi-LSTM with random word embeddings}
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}

@@ -398,11 +398,11 @@ Macro average score of the classifier is calculated by calculating the same meas
 
 $$B_\mathrm{macro}(h) = \frac{1}{p}\sum_{i =1}^{p}B(TP_j,FP_j,TN_j,FN_j), (B\in \{Accuracy,precision,recall,f1score\})$$ \cite{zhang2010multi}
 
-\subsubsection{Macro average Area Under ROC score}
-Area under Receiver operating characteristics curve (ROC) is a model performance measurement score based on ROC curve. ROC curve is a graphical plot which gives a cumulative view of the true positive rate (TPR - [Y-axis]) and false positive rate (FPR - [X-axis]) at different thresholds in the case of binary classification. \cite{zhang2013review}. For multi label, ROC is  extended with one vs rest algorithm where TPR and FPR are plotted per class label \cite{aggarwal2012survey}. Area under ROC gives the cumulative measure of the entire area underneath the ROC curve, thus giving an over all cumulative measure of the performance of the model \cite{aggarwal2012survey}. The higher the score, the better the model is at distinguishing the positive and negative classes or avoid false classification\cite{sokolova2009systematic}. 
+% \subsubsection{Macro average Area Under ROC score}
+% Area under Receiver operating characteristics curve (ROC) is a model performance measurement score based on ROC curve. ROC curve is a graphical plot which gives a cumulative view of the true positive rate (TPR - [Y-axis]) and false positive rate (FPR - [X-axis]) at different thresholds in the case of binary classification. \cite{zhang2013review}. For multi label, ROC is  extended with one vs rest algorithm where TPR and FPR are plotted per class label \cite{aggarwal2012survey}. Area under ROC gives the cumulative measure of the entire area underneath the ROC curve, thus giving an over all cumulative measure of the performance of the model \cite{aggarwal2012survey}. The higher the score, the better the model is at distinguishing the positive and negative classes or avoid false classification\cite{sokolova2009systematic}. 
 
-$$AUC_macro = \frac{1}{p}\sum_{i =1}^{p} AUC_i$$
-\cite{zhang2010multi}
+% $$AUC_macro = \frac{1}{p}\sum_{i =1}^{p} AUC_i$$
+% \cite{zhang2010multi}
 
 \subsubsection{Micro average (per-text average)}
 Micro average score on the other hand is calculated by calculating the measure globally over all the instances and class labels rather than measuring per individual labels.\cite{zhang2010multi}
