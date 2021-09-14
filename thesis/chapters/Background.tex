@@ -1,4 +1,4 @@
-\chapter{Background and related work}
+\chapter{Background}
 
 In this chapter, the background and fundamentals related to this thesis is covered briefly. Section\ref{stereotypes, language}, gives an overview about stereotypes, its origin, its perspectives and the role of language in sustenance and maintenance of stereotypes. 
 
@@ -29,7 +29,7 @@ System 1 (Intuitive)                  & System 2 (Reflective)              \\ \m
 \label{tab:cognitive systems}
 \end{table}
 
-\pagebreak
+% \pagebreak
 % \begin{itemize}
 %     \item Origin of bias (System -1 and system -2) ; TWO FAMILIES OF COGNITIVE OPERATIONS \cite{kahneman2002representativeness}
 %     \item  How stereotypes are inevitably formed (implicit bias) ??
@@ -56,7 +56,12 @@ Until this point, stereotypes can be understood as generalized beliefs about a g
 
 \\
 \\
-"Stereotypes are considered to be the "pictures in the head" of individuals looking out into their social worlds"\cite{macrae1996stereotypes}. Hence, one perspective is that of the generalized impressions people have in their head. On the other hand, these generalized impressions could be shared socially among the ethnic or cultural groups. This gives a socially shared perspectives of stereotypes. "Stereotypes only have meaning to the extent they are socially shared. But stereotypes only have meaning to the extent they are socially shared"\cite{macrae1996stereotypes}. Putting all together, stereotypes are generalized beliefs about a group of individuals. These beliefs could be "pictures in the head" or it could be socially shared. Considering the perspective that socially shared stereotypes only have meaning, there arises a need for a medium for the transmission of stereotypes. Language thus plays an important role in the sustenance and maintenance of stereotypes\cite{macrae1996stereotypes}.
+"Stereotypes are considered to be the "pictures in the head" of individuals looking out into their social worlds"\cite{macrae1996stereotypes}. Hence, one perspective is that of the generalized impressions people have in their head. On the other hand, these generalized impressions could be shared socially among the ethnic or cultural groups. This gives a socially shared perspectives of stereotypes. "Stereotypes only have meaning to the extent they are socially shared"\cite{macrae1996stereotypes}. Putting all together, stereotypes are generalized beliefs about a group of individuals. These beliefs could be "pictures in the head" or it could be socially shared. 
+
+In this thesis, both the perspectives, stereotypes as pictures in head and socially shared stereotypes are considered while assessing the stereotypes encoded in the text sequences.
+
+
+Considering the perspective that socially shared stereotypes only have meaning, there arises a need for a medium for the transmission of stereotypes. Language thus plays an important role in the sustenance and maintenance of stereotypes\cite{macrae1996stereotypes}.
 
 
 
@@ -89,7 +94,7 @@ Until this point, stereotypes can be understood as generalized beliefs about a g
 The role of language in maintenance of social category stereotypes has been significant
 \\
 \cite{burgers2020language}.
- Social categories and Stereotypes Communication (SCSC) 
+ "Social categories and Stereotypes Communication (SCSC)" 
  \cite{beukeboom2019stereotypes} mentions two broad linguistic biases, namely, linguistic labels used to refer to categorized individuals. Out of generic and specific labels all, Generic labels play a crucial role in stereotype communication\cite{burgers2020language}. Generic labels refer to a category as a whole, e.g.("women are ...") while specific labels refer to subgroups ("Young women.."). Typically, generic labels facilitate the communication of stereotypic information when compared to specific labels\cite{burgers2020language}. 
  
  The second group of linguistic biases in stereotype communication relates to the language use in communication\cite{beukeboom2019stereotypes}. It has been shown that speakers systematically vary the language when either describing the stereotypical consistent behavior or stereotypical inconsistent behavior. The stereotypic consistent behavior is described with high essentialism  ("The rocket scientist is smart") whereas stereotype inconsistent behavior is described as a one time event with low essentialism and use negation to describe the one time specific situational circumstance ("The rocket scientist is not smart")\cite{burgers2020language}.  
@@ -170,43 +175,76 @@ The entire process of training a neural network can be broken down into forward 
             \label{fig:RNN}
 \end{figure}
 Recurrent neural networks short for RNN \cite{mikolov2010recurrent} are useful when dealing with sequential data. Every RNN unit contains two inputs as seen in the figure \ref{fig:RNN}, one input vector (u), one hidden state (w) and an output vector (v) at each time step. The disadvantages of vanilla RNN is that, it  cannot deal with long dependency. Solutions to this problem proposed with variants of RNN architecture GRU (Gated Recurrent Unit), LSTM (Long Short Term Memory Unit) \cite{mikolov2010recurrent}\footnote{\url{https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/}}.
-\subsection{Transformer architecture \cite{vaswani2017attention}}
-Transformers \cite{vaswani2017attention}, is a model that uses attention to boost speed of training. The contribution of transformers when compared to RNN is that transformers facilitate long range dependencies with attention mechanism. Transformers avoid vanishing and explosion gradients as transformers does computation for entire sequence simultaneously. 
-
+\subsection{Transformer architecture}
 \begin{figure}[]
          \includegraphics[width=9cm]{thesis/figures/Transformers.PNG}
             \centering
-            \caption{Transformers architecture}
-            \label{fig:RNN}
+            \caption{Transformers architecture  \cite{vaswani2017attention}}
+            \label{fig:Transformers}
 \end{figure}
+
+Transformers \cite{vaswani2017attention}, is a model that uses attention to boost speed of training. The contribution of transformers when compared to RNN is that transformers facilitate long range dependencies with attention mechanism. Transformers avoid vanishing and explosion gradients as transformers does computation for entire sequence simultaneously and fewer training steps with no recurrence \footnote{\url{https://www.youtube.com/watch?v=OyFJWRnt_AY&ab_channel=PascalPoupart}}\cite{vaswani2017attention}.  
+
+As can be seen in the figure \ref{fig:Transformers}, Transformer consists of two blocks, namely an encoder-stack (left part of transformers) and a decoder stack (right part of transformer). Each encoder stack takes in input word embedding as input and outputs encoded input word embedding with contextual information. The encoder stack intern consists of a feed forward neural network, add and layer normalization and an attention (self/multi attention head). Coming to the decoder stack, the input is an encoded input word embedding and masked output word embedding. the output of the decoder is the probability distribution over the words in the dictionary. Decoder stack consists of  an attention head (self/multi-head), add and layer normalization for regularization, encoder-decoder attention, feedforward neural network Mainly transformers architecture was used to train on language modeling task and hence the pipeline followed by encoder and decoder stacks of transformers will be discussed .\footnote{\url{https://www.youtube.com/watch?v=OyFJWRnt_AY&ab_channel=PascalPoupart}} \cite{vaswani2017attention}
+
+\subsubsection{Encoder-stack}
+Briefly describing the encoder stack training pipeline, firstly, as shown in the figure \ref{fig:Transformers}, the inputs are fed into the encoder stack, then these inputs are converted into word embeddings. Positional encoding is added for words in sequence to provide the positional information. Multi-head attention is used to compute attention of each word in a sequence against the other words. the main idea is to treat each word as query and find keys (other words) in the sentence based on similarity and finally compute the dot product of query and key vector to compute attention score of each word against other words. The output of multi-head attention passes through add and norm for regularization. The outputs are passed to a feed forward layer and an add and norm for regularization. The same pipeline is repeated for the stacked encoder blocks. All the encoder receive vectors of 512 and word in each encoder flow through their own path (GPU parallelization)[5]\cite{vaswani2017attention}.
+
+\subsubsection{Decoder-stack}
+Coming to the decoder-stack, the following pipeline is followed. Firstly, as shown in the figure \ref{fig:Transformers}, word embeddings from the first iteration are given as input to the decoder-stack. It passes through positional encoding where positional information is added. The outputs from positional encoding are passed though masked multi-head attention. The multi-head attention is masked with (-infinity) to avoid and make the self attention to focus on previous words rather than the future words as decoder-stack of transformers are used for language modeling task. Then outputs pass through add and norm for regularization. The outputs now pass through multi-head attention which taken the input from the encoder (multiple key, value pairs) and output from the masked multi head attention of the decoder to calculate the inter attention between input and output. The outputs of the multi-head attention pass through a feed forward layer followed by add and norm followed by a linear layer with softmax activation function which outputs probabilities over the vocabulary. The output of this is again fed as input to the decoder[5]\cite{vaswani2017attention}. 
+
 \section{Natural language processing and language modeling}
-    \textbf{Text classification algorithms : a survey }\url{https://www.mdpi.com/2078-2489/10/4/150/htm}
-    \subsection{Vector representation of text}
-    \begin{itemize}
-        \item What is NLP?
-        \item Feature vectors for text 
-            \begin{itemize}
-                \item Bag of words
-                \item TF-IDF
-            \end{itemize}
-        \item Word embeddings
-        \item Static word embedding
-        \item Word2vec, glove basic architecture
-    \subsection{Text classification}    \item Text classification 
-        \begin{itemize}
-            \item classification types (Binary, multi class, multi label)
-            \item LPP
-            \item Sigmoid activation function and binary cross entropy loss function
-            \item General text classification metrics (Accuracy, precision, recall, fmeasure)
-            \item Multi label text classification and problem transformation 
-        \end{itemize}
-    \end{itemize}
+
+\subsection{Text Representation}
+\subsubsection{Bag of words}
+A bag of words is one of the simple text representation algorithm based on word counts. The first step is to 
+
+\subsubsection{Term frequency and inverse document frequency}
+
+\subsubsection{Glove word embedding}
+
+\subsubsection{Fasttext word embedding}
+
+\subsubsection{Flair word embedding}
+
+\subsection{Text classification}
+
+\subsubsection{Multi label text classification and problem transformation}
+
+Data transformation is one of the methods used for dealing 
+\subsection{Text classification models}
+
+
+\subsubsection{Convolutional neural networks}
+\subsubsection{Naive bayes}
+\subsubsection{Decision trees}
+\subsubsection{SVM}
+
+    % \begin{itemize}
+    %     \item  
+    %     \item Feature vectors for text 
+    %         \begin{itemize}
+    %             \item Bag of words
+    %             \item TF-IDF
+    %         \end{itemize}
+    %     \item Word embeddings
+    %     \item Static word embedding
+    %     \item Word2vec, glove basic architecture
+    % % \subsection{Text classification}    \item Text classification 
+    %     \begin{itemize}
+    %         \item classification types (Binary, multi class, multi label)
+    %         \item LPP
+    %         \item Sigmoid activation function and binary cross entropy loss function
+    %         \item General text classification metrics (Accuracy, precision, recall, fmeasure)
+    %         \item Multi label text classification and problem transformation 
+    %     \end{itemize}
+    % \end{itemize}
     \subsection{Language modeling}
     \subsection{Transfer learning}
-    \subsection{BERT architecture}
+    % \subsection{BERT architecture}
 % \section {Evaluation metrics}    
-\section{Bias and social bias in Natural language processing}
-\begin{itemize}
-    \item A critical survey of bias in NLP \cite{blodgett2020language}
-    \item A survey on Bias in Deep NLP \cite{garrido2021survey}
-\end{itemize}
+% \section{Bias and social bias in Natural language processing}
+% \begin{itemize}
+%     \item A critical survey of bias in NLP \cite{blodgett2020language}
+%     \item A survey on Bias in Deep NLP \cite{garrido2021survey}
+% \end{itemize}
