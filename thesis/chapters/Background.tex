@@ -1,7 +1,8 @@
 \chapter{Background and related work}
 
-In this chapter, the background and fundamentals related to this thesis
-\section{Stereotypes, language and stereotyping}
+In this chapter, the background and fundamentals related to this thesis is covered briefly. Section\ref{stereotypes, language}, gives an overview about stereotypes, its origin, its perspectives and the role of language in sustenance and maintenance of stereotypes. 
+
+\section{Stereotypes, language and stereotyping} \label{stereotypes, language}
 \subsection{Background}
 
 Traditionally, there have been two kinds of cognitive processes called intuition and reason \cite{kahneman2002representativeness}. Dual process is the general label adopted where in two cognitive operations are described with generic labels "system 1" and "system 2" \cite{kahneman2002representativeness}. System 1 describes the cognitive mode, which is intuitive and fast. System 2 on the other hand is reflective  controlled. Table \ref{tab:cognitive systems} gives an overview of the two systems. These two cognitive modes play a role in the formation of bias. Biases in the cognition arises due to the attribute substitution. Attribute substitution heuristics states that "when confronted with a difficult question, people often answer an easier one instead, usually
@@ -85,17 +86,22 @@ Until this point, stereotypes can be understood as generalized beliefs about a g
 % \end{itemize}
 \subsection{Contribution of language}
 
-The role of language in maintenance of social category stereotypes has been significant\cite{burgers2020language}.
- Social categories and Stereotypes Communication (SCSC) \cite{beukeboom2019stereotypes} mentions two broad linguistic biases, namely, linguistic labels used to refer to categorized individuals. Out of generic and specific labels all, Generic labels play a crucial role in stereotype communication\cite{burgers2020language}. Generic labels refer to a category as a whole, e.g.("women are ...") while specific labels refer to subgroups ("Young women.."). Typically, generic labels facilitate the communication of stereotypic information when compared to specific labels\cite{burgers2020language}. 
+The role of language in maintenance of social category stereotypes has been significant
+\\
+\cite{burgers2020language}.
+ Social categories and Stereotypes Communication (SCSC) 
+ \cite{beukeboom2019stereotypes} mentions two broad linguistic biases, namely, linguistic labels used to refer to categorized individuals. Out of generic and specific labels all, Generic labels play a crucial role in stereotype communication\cite{burgers2020language}. Generic labels refer to a category as a whole, e.g.("women are ...") while specific labels refer to subgroups ("Young women.."). Typically, generic labels facilitate the communication of stereotypic information when compared to specific labels\cite{burgers2020language}. 
  
- The second group of linguistic biases in stereotype communication relates to the language use in communication\cite{beukeboom2019stereotypes}. It has been shown that speakers systematically vary the language when either describing the stereotypical consistent behavior or stereotypical inconsistent behavior. The stereotypic consistent behavior is described with high essentialism  \cite{burgers2020language}.  
-    \begin{itemize}
-        \item Stereotypes as collective belief systems \cite{macrae1996stereotypes}
-        \item How language contributes to stereotype formation \cite{burgers2020language}
-        \item How stereotypes are shared through language: a
-    review and introduction of the social categories
-    and stereotypes communication (SCSC) framework \cite{beukeboom2019stereotypes}
-    \end{itemize}
+ The second group of linguistic biases in stereotype communication relates to the language use in communication\cite{beukeboom2019stereotypes}. It has been shown that speakers systematically vary the language when either describing the stereotypical consistent behavior or stereotypical inconsistent behavior. The stereotypic consistent behavior is described with high essentialism  ("The rocket scientist is smart") whereas stereotype inconsistent behavior is described as a one time event with low essentialism and use negation to describe the one time specific situational circumstance ("The rocket scientist is not smart")\cite{burgers2020language}.  
+ \\
+There is a bidirectional link between stereotype and language use, as language acts as a medium by which stereotypes are shared and social category stereotypes in turn feed the medium through message recipients\cite{burgers2020language}. 
+    % \begin{itemize}
+    %     \item Stereotypes as collective belief systems \cite{macrae1996stereotypes}
+    %     \item How language contributes to stereotype formation \cite{burgers2020language}
+    %     \item How stereotypes are shared through language: a
+    % review and introduction of the social categories
+    % and stereotypes communication (SCSC) framework \cite{beukeboom2019stereotypes}
+    % \end{itemize}
     % \pagebreak
 
 % Please add the following required packages to your document preamble:
@@ -131,45 +137,48 @@ The role of language in maintenance of social category stereotypes has been sign
 
 \section{Machine learning and deep learning}
 \subsection{Machine learning pipeline}
-    \begin{itemize}
-        \item Machine learning setup by abu mustafa 
-        \begin{figure}[t]
-            \includegraphics[width=8cm]{thesis/figures/Learning problem.PNG}
+\begin{figure}[t]
+            \includegraphics[width=8cm]{thesis/figures/MLpipeline.PNG}
             \centering
-            \caption{The learning problem setup}
+            \caption{The learning problem setup\cite{abu2012learning}}
             \label{fig:The learning problem setup}
         \end{figure}
-        \begin{enumerate}
-            \item Explain different components of learning problem  learning problem 
-            
-        \end{enumerate}
-        \item Types of training (supervised, unsupervised, reinforcement learning and focus on supervised)
-        \item Learning models (Classification, regression)
-        \item Linear and logistic Regression and gradient descent 
-        \textbf{Refer to udemy machine learning course notes}
-        % \item SVM and selected classifiers \textbf{TBD ??}
-    \end{itemize}
+Machine learning could be introduced as "learning from data" \cite{abu2012learning}. Machine learning is used when, there exists a pattern, that which can be pin it down mathematically and last but not least, there is some data\cite{abu2012learning}. Machine learning deals with development and analysis of a learning algorithm (A). The aim of the developing a learning algorithm is to use it for specific task for specific purpose expecting certain quality of output\cite{abu2012learning}.  Hence, the data used to train the learner should represent the learning task in order for the learner to learn.  The aim is to learn an algorithm that generalizes across data \cite{abu2012learning}. In supervised learning, (a type of learning algorithm), the learner is provided with labeled data to train on. In general, the labeled is split into training and validation sets and the model is trained and validated against the validation test. Finally, the model is tested on test set which is not seen while training\cite{abu2012learning}. Defining it in more detail, the input instance is split into instance spce $x$ and output space $y$ and the goal is to learn a mapping from $x$ to $y$ formerly known as target function as shown in the figure \ref{fig:The learning problem setup}. In order to learn a target function g, the learning algorithm (A) is given a set of (D) training examples {x,y} belonging to input and output space\cite{abu2012learning}. At output, the learner produces a function 'g' that is an element of hypothesis space (h) \cite{abu2012learning}. Learner (A) tries to choose a hypothesis from (h) that best fits the data (D). The result of the learning process is model (g) which tries to approximate (f)  \cite{abu2012learning}.
 \subsection{Neural Networks architecture}
-    \begin{itemize}
-        \item Deep learning vs Machine learning 
-        \item Neural network basic setup (perceptron learning algorithm)
-        \item Basic neural network forward pass and backward pass
-        \item  Deep neural network and its variants
-        \item Refer \url{https://github.com/mvdheram/DeepLearning-Notebooks/blob/main/Introduction_to_PyTorch.ipynb}
-        \item \textbf{IMP : Classification using neural networks} 
-    % \end{itemize}
-    % \begin{itemize}
-        \item Dropout for regularization 
-    \end{itemize}
-\subsection { Recurrent Neural Networks }
-            \begin{itemize}
-                \item Limitations of NN 
-                \item Why RNN when dealing with text ?
-                \item Contextual word embedding
-            \end{itemize}
+Conventional machine learning algorithms needed a domain expert to transform the raw input into representations or features vector, which are then fed into the machine learning model \cite{lecun2015deep}. "Deep learning methods are representation learning methods"\cite{lecun2015deep}. "For classification tasks, higher layers of representation
+amplify aspects of the input that are important for discrimination and
+suppress irrelevant variations"\cite{lecun2015deep}. the Figure \ref{fig:PLA} shows the perceptron learning algorithm, which is a basic neural network structure. The algorithm works in this way, firstly, the inputs are passed along to the input layer($x_i$), next for each of this input  a weight ($w_i$) is being attached to either amplify or suppress the corresponding feature (which is how the neural network learn). The inputs with corresponding weights gets passed to the neuron, where the weighted sum of input values are calculated ($(\sum_{i=1}^{n}w_ix_i)$). Finally, the weighted sum is passed through an activation function to the corresponding next neuron. This forms the building block of a neural network. The neural network begins to learn by adjusting the corresponding weights attached to it.\cite{lecun2015deep} The rate of change of weight is calculated with the help of cost function or loss function. Loss function calculate the error or the loss between the output  and the predicted/ actual value. Based on the loss function, error is calculated which is backpropagated through the neural network and the weights are thus updated based on the cost/ loss function. The algorithm that is used to update weights is called batch gradient descent\cite{lecun2015deep}. During the backpropagation the hyperparameters which are the tunable parameters used to control the learning process of the model gets adjusted\cite{rumelhart1995backpropagation}.
 
-\subsection{Transformer architecture}
-    
+The entire process of training a neural network can be broken down into forward pass and backward pass. During the forward pass, the weighted sum and the activation function is applied. Finally, an error is calculated using a loss function. During the backward pass the loss is backpropagated to calculate the rate of change (gradients)  of weights associated to neurons. The weights are thus updated based on the gradients \cite{rumelhart1995backpropagation}\cite{lecun2015deep}. During training, the model might overfit to the training data i.e. where the training loss and validation loss have a big difference. This can be avoided by using regularization techniques where the neural network is adjusted while training to avoid this pitfall\cite{girosi1995regularization}. Regularization technique include dropout, batchnormaliztion etc.
+
+
+
+
+
+
+\begin{figure}[t]
+            \includegraphics[width=9cm]{thesis/figures/perceptronLearningAlgo.jpg}
+            \centering
+            \caption{Perceptron \footnote{\url{https://www.youtube.com/watch?v=kft1AJ9WVDk&ab_channel=Polycode}}}
+            \label{fig:PLA}
+\end{figure}
+\subsection {Recurrent Neural Networks (RNN)}
+\begin{figure}[]
+            \includegraphics[width=9cm]{thesis/figures/RNN.png}
+            \centering
+            \caption{Recurrent neural network \footnote{\url{http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/}}}
+            \label{fig:RNN}
+\end{figure}
+Recurrent neural networks short for RNN \cite{mikolov2010recurrent} are useful when dealing with sequential data. Every RNN unit contains two inputs as seen in the figure \ref{fig:RNN}, one input vector (u), one hidden state (w) and an output vector (v) at each time step. The disadvantages of vanilla RNN is that, it  cannot deal with long dependency. Solutions to this problem proposed with variants of RNN architecture GRU (Gated Recurrent Unit), LSTM (Long Short Term Memory Unit) \cite{mikolov2010recurrent}\footnote{\url{https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/}}.
+\subsection{Transformer architecture \cite{vaswani2017attention}}
+Transformers \cite{vaswani2017attention}, is a model that uses attention to boost speed of training. The contribution of transformers when compared to RNN is that transformers facilitate long range dependencies with attention mechanism. Transformers avoid vanishing and explosion gradients as transformers does computation for entire sequence simultaneously. 
+
+\begin{figure}[]
+         \includegraphics[width=9cm]{thesis/figures/Transformers.PNG}
+            \centering
+            \caption{Transformers architecture}
+            \label{fig:RNN}
+\end{figure}
 \section{Natural language processing and language modeling}
     \textbf{Text classification algorithms : a survey }\url{https://www.mdpi.com/2078-2489/10/4/150/htm}
     \subsection{Vector representation of text}
